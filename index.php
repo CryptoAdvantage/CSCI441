@@ -8,9 +8,10 @@
 <body>
     <main id="landing">
         <section class="intro">
-        <img src="./images/landing.png" alt="Image of cryptocurrency coins" class="intro">
-        <h1>Crypto Advantage</h1>
-        <h2>Leverage AI and machine learning to boost your competitive advantage</h2>
+            
+            <img src="./images/landing.png" alt="Image of cryptocurrency coins" class="intro">   
+            <h1>Crypto Advantage</h1>     
+            <p>Leverage AI and machine learning to boost your competitive advantage</p>
         </section>
     </main>
 </body>
