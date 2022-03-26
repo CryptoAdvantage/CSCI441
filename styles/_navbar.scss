@@ -1,0 +1,203 @@
+#nav-bar{  
+    $colorNavBar: $colorPrimary;
+    
+    .menu{
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 4rem;
+        background-color: $colorBackground;
+        padding:0;
+        top: 0;
+        left: 0;
+        z-index: 100;
+
+        &.open{
+            background-color: transparent;
+        }
+
+        .name.open{
+            visibility: hidden;
+        }
+
+        .name a{
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;               
+            color: $colorNavBar;
+        }
+
+        h2{
+            color: $colorNavBar;
+            font-size: $fontSmall;
+            margin-left: 2.5vw;
+            &:hover{
+                transition: all 0.2s ease-in-out;
+               transform: scale(1.05,1.05)
+            }
+        }
+
+        svg{
+            margin-left: 2.5vw;
+            height: calc(0.8vw + 30px);
+            width: auto;
+            border: none;
+            max-height: 80%;
+            min-height: 50%;
+            fill: $colorNavBar;
+
+            &:hover{
+                transition: all 0.2s ease-in-out;
+                transform:rotate(360deg);
+            }
+        }
+    }
+    .menu-options{
+        @include flexBox(center);
+        //width: 150px;
+
+        padding: 0;
+        margin: 0;
+        height: 100%;
+
+        .lightmode{
+            width: calc(0.7vw + 18px);
+            height: 100%;
+            cursor: pointer;
+
+            @include flexBox(center);
+
+            svg{
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                
+
+                &:hover{
+                    transition: all 0.3s ease-in-out;
+                    transform:rotate(360deg);
+                }
+            }
+        }
+
+    }
+    
+
+    .menu-btn{  
+        margin: 0 calc(10px + 1vw);
+        display: flex; 
+        position: relative; 
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        z-index: 50;
+        &:hover{
+            transform: scale(1.1,1.0);
+        }
+    }
+
+    @mixin burgerLine(){
+        width: 100%;
+        height: 2.5px;
+        background: $colorNavBar;
+        transition: all 0.3s ease-in-out;  
+    }
+
+    .menu-btn__burger{
+        @include burgerLine();       
+
+        &::before, &::after{
+            content: '';
+            position: absolute;
+            @include burgerLine();  
+        }
+
+        &::before{
+            transform: translateY(-9px);
+        }
+
+        &::after{
+            transform: translateY(9px);
+        }
+    }
+
+    .menu-btn.open .menu-btn__burger{
+        transform:rotate(270deg);        
+        background: transparent;
+        box-shadow: none;
+
+        &::before{
+            transform:rotate(45deg);
+            background: $colorBackground;
+           
+        }
+
+        &::after{
+            transform:rotate(-45deg);
+            background: $colorBackground;
+        }
+    }
+
+    nav{
+        position:fixed;       
+        height: 100%;
+        width: 0px;
+        top: 0px;
+        background-color: $colorPrimary;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease-in-out;
+
+        ul{
+            visibility: hidden;
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            height: 100vh;        
+            width: 50%;
+            margin: auto;
+            flex-direction: column;
+            flex-wrap: wrap;   
+            justify-content: space-around;
+            align-content: center;
+        }
+
+        li{
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+    
+            &:hover{
+                transition: all 0.3s ease-in-out;
+                border-bottom: 7px solid $colorSecond;
+            }
+    
+            a{
+                display: block;
+                background-color: inherit;    
+                color: $colorBackground;
+                font-size: $fontXLarge;   
+                width: 100%;
+            }
+        }
+
+        &.open{
+            height: 100vh;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+            z-index: 10;
+    
+            ul{
+                visibility: visible;
+                transition-delay: 0.2s;
+            }
+        }
+    }
+}

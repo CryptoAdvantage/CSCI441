@@ -1,0 +1,28 @@
+#landing{
+    .intro{
+        text-align: center;
+
+        img{
+            width: 32vh;
+            border-radius: 100%;
+            border-width: 5px;
+            border-color:$colorPrimary;
+        }
+
+        h1{
+            font-size: $fontXXLarge;
+        }
+    }
+
+    p{
+        padding:1rem;
+        font-size: $fontSmall;
+        width: 100%;
+
+        &.intro{
+            @media screen and (max-width: $screenSmall){
+                display: none;
+            }
+        }
+    }
+}

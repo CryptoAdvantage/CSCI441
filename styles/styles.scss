@@ -1,0 +1,72 @@
+@import "./variables";
+@import "./navbar";
+@import "./footer";
+@import "./landing";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+    background-color: transparent;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5{
+    line-height: 1.2;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: $colorText;
+}
+
+h1{
+    color: $colorPrimary;
+    font-size: $fontXLarge;
+    padding: 1rem;
+    text-shadow: 1.5px 1.5px $colorSecond;  
+}
+
+h3, h2{         
+    padding: 1rem;  
+    text-shadow: 2px 2px $colorBackground;   
+}
+
+h2{
+    color: $colorPrimary;
+    font-size: $fontLarge;
+}
+
+h3{
+    font-size: $fontMed;
+}
+
+a{
+    color: $colorText;
+    text-decoration: none;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    &:hover{
+        background-color: $colorBackground;
+        color:$colorPrimary;
+    }
+}
+
+
+body {
+    min-height: 100vh;
+    background-color: $colorBackground;
+    color: $colorText;
+}
+
+main{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: auto;
+
+    min-height: calc(100vh - 4rem);
+}
