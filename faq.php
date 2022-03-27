@@ -1,7 +1,7 @@
 <html>
 <?php
    $pageTitle = "CryptoAdvantage | FAQ";
-   include "./templates/header.php";
+   include_once "./templates/header.php";
    include_once "./templates/navbar.php";
 ?>
 

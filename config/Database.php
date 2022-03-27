@@ -24,9 +24,9 @@
             ////    Local Dev Code -- Delete Later    ////
             //////////////////////////////////////////////
             $this->hostname = "localhost";
-            $this->username = "root"
-            $this->password = ""
-            $this->database = "cryptoadvantage"
+            $this->username = "root";
+            $this->password = "";
+            $this->database = "cryptoadvantage";
         }
 
         public function connect(){          
