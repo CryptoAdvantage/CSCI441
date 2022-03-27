@@ -1,0 +1,15 @@
+.entry-form{
+    @include flexBox(space-around);
+    flex-direction: column;
+    border: 5px solid $colorPrimary;
+    padding: 4vh 4vw;
+
+    .input-item{
+        @include flexBox(space-between);
+        //flex-direction: column;
+        font-size: $fontSmall;
+        width: 100%;
+        margin: 1vh;
+    }
+    
+}
