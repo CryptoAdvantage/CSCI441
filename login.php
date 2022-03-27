@@ -1,25 +1,36 @@
 <html>
-<?php
+<?php   
+    session_start();
    $pageTitle = "CryptoAdvantage | Login";
    include_once "./templates/header.php";
    include_once "./templates/navbar.php";
+
+   if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]){
+    header("Location: ./dashboard.php");       
+    exit;
+}
 ?>
 
 <body>
     <main>
         <h2>Account Log In</h2>
-        <form method="post" class="entry-form" action="./dashboard.php">
+        <form method="POST" class="entry-form" action="./dashboard.php">
             <div class="input-item">
                 <label for="email">Email:</label>
-                <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="input-item">
                 <label for="password">Password:</label>
-                <input type="password" id="password" minlength="8" required>                
+                <input type="password" id="password" name="password" required>                
             </div>
             <div class="input-item">
                 <input class="btn" type="submit" value="Log in">              
-            </div>           
+            </div> 
+            <?php 
+                if(isset($_GET["error"])){
+                    echo "<h5>ERROR - Invalid credentials</h5>";
+                }
+            ?>         
         </form>
         
         <div class="other-options">
@@ -29,7 +40,7 @@
             <div class="btn">
                 <a href="">Forgot Password</a>
             </div>           
-        </div>
+        </div>       
     </main>
 </body>
 

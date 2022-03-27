@@ -3,6 +3,7 @@
 @import "./footer";
 @import "./landing";
 @import "./entryform";
+@import "./dashboard";
 
 * {
     margin: 0;
@@ -70,4 +71,11 @@ main{
     margin: auto;
 
     min-height: calc(100vh - 4rem);
+
+    p{
+        padding:1rem;
+        font-size: $fontSmall;
+        width: 100%;
+    }
 }
+

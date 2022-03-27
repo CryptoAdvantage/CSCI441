@@ -448,6 +448,14 @@ footer .social-row li a {
   background-color: #323232;
 }
 
+.result-msg {
+  text-align: center;
+}
+
+img.dashboard {
+  width: 90vw;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -522,4 +530,10 @@ main {
   max-width: 1200px;
   margin: auto;
   min-height: calc(100vh - 4rem);
+}
+
+main p {
+  padding: 1rem;
+  font-size: calc(0.2vw + 17px);
+  width: 100%;
 }
