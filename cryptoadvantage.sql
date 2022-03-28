@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2022 at 10:30 PM
+-- Generation Time: Mar 28, 2022 at 04:23 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -5332,7 +5332,7 @@ CREATE TABLE `user` (
   `Phone` varchar(10) NOT NULL,
   `SecurityKey` varchar(20) NOT NULL,
   `Password` varchar(255) NOT NULL,
-  `Permission` int(1) NOT NULL
+  `Permission` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -5341,7 +5341,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`ID`, `Email`, `Phone`, `SecurityKey`, `Password`, `Permission`) VALUES
 (1, 'andy@madeupaddy.net', '3374605272', 'S_KEY_354', 'Pass_905', 1),
-(2, 'curtis@madeupaddy.net', '2879358940', 'S_KEY_570', 'Pass_630', 2),
+(2, 'cjr@cjruder.net', '2879358940', 'S_KEY_570', 'password123456!', 2),
 (3, 'jenny@madeupaddy.net', '8051605400', 'S_KEY_243', 'Pass_888', 1),
 (4, 'becky@madeupaddy.net', '2644401133', 'S_KEY_957', 'Pass_221', 1),
 (5, 'harvey@madeupaddy.net', '1170972632', 'S_KEY_371', 'Pass_322', 1),
@@ -5436,7 +5436,7 @@ ALTER TABLE `tradepair`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
