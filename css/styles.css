@@ -325,10 +325,17 @@ footer .social-row li a {
 }
 
 #landing .intro img {
-  width: 40vh;
+  width: 45vh;
   border-radius: 100%;
-  border-width: 5px;
+  border-width: 15px;
   border-color: #c8642d;
+  border-style: double;
+}
+
+@media screen and (max-width: 600px) {
+  #landing .intro img {
+    width: 30vh;
+  }
 }
 
 #landing .intro h1 {

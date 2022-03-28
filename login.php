@@ -38,7 +38,7 @@
                 <a href="./register.php">New User</a>
             </div>  
             <div class="btn">
-                <a href="">Forgot Password</a>
+                <a href="./forgotpassword.php">Forgot Password</a>
             </div>           
         </div>       
     </main>

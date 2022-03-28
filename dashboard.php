@@ -17,16 +17,13 @@
     include_once "./templates/header.php";
     include_once "./templates/navbar.php";
 
-    if(!isset($_SESSION["loggedin"])){     
-        $database = new Database();
-        $db = $database->connect(); 
+    $database = new Database();
+    $db = $database->connect(); 
+    $user = new User($db);
 
-        $user = new User($db);     
-        $_SESSION["loggedin"] = $user->logIn();
-        $_SESSION["useremail"] = $user->POST("email");
-    } 
-
-    if(!$_SESSION["loggedin"]){
+    if($user->isLogInAttempt()) $_SESSION["loggedin"] = $user->logIn();
+    
+    if(!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
         header("Location: ./login.php?error");       
         exit;
     }

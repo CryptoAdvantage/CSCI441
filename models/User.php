@@ -10,6 +10,10 @@ class User extends BaseModel{
         return $this->hasData("Select * from user where email=?", array($this->POST("email")));
     }
 
+    public function isLogInAttempt(){
+        return $this->hasParams(array("email", "password"));
+    }
+
     public function logIn(){
         if($this->loggedIn) return true;
         if(!$this->exists()) return false;

@@ -3,10 +3,15 @@
         text-align: center;
 
         img{
-            width: 40vh;
+            width: 45vh;
             border-radius: 100%;
-            border-width: 5px;
+            border-width: 15px;
             border-color:$colorPrimary;
+            border-style: double;
+
+            @media screen and (max-width: $screenSmall){
+                width: 30vh;
+            }
         }
 
         h1{

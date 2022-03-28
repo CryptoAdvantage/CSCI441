@@ -17,7 +17,7 @@
             <li><a href="./index.php">Home</a></li>                    
             <li><a href="./about.php">About</a></li>                    
             <li><a href="./faq.php">FAQ</a></li>
-            <li><a href="./login.php">Login</a></li>
+            <li><a href="./login.php">Log In</a></li>
         </ul>
     </nav>
 </div>

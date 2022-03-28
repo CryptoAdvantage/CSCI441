@@ -35,24 +35,6 @@ class BaseModel{
         return $this->execute($query, $params)->rowCount() > 0;
     }
 
-    private function convertToArray($result){
-        $arr = array();
-        $keys = null;
-
-        while($row = $result->fetch(PDO::FETCH_ASSOC)){
-            if($keys == null){$keys = array_keys($row);}
-
-            $item;
-            for($i = 0; $i < count($row); $i++){
-                $item[$keys[$i]] = $row[$keys[$i]];
-            }
-
-            array_push($arr, $item);
-        }
-
-        return $arr;
-    }
-
     public function getInsertId(){
         return $this->conn->lastInsertId();
     }

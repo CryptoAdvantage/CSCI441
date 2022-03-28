@@ -27,14 +27,10 @@
         <?php
             $user = new User($db);
             if($user->register()){
-        ?>
-        
+        ?>    
             <p class="return-msg">Your new user account was created successfully!</p>
-
-        <?php } else { ?>
-        
+        <?php } else { ?>        
             <p class="return-msg">ERROR - The email provided is already in the system.</p>
-
         <?php } ?>
         
         <p class="return-msg">
