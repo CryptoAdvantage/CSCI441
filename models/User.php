@@ -1,7 +1,5 @@
 <?php
-class User extends BaseModel{
-    private $loggedIn = false;
-
+class User extends BaseModel{    
     public function __construct($db){
         parent::__construct($db);   
     }
@@ -14,19 +12,13 @@ class User extends BaseModel{
         return $this->hasParams(array("email", "password"));
     }
 
-    public function logIn(){
-        if($this->loggedIn) return true;
+    public function logIn(){        
         if(!$this->exists()) return false;
 
         $cmd = "Select * from user where email=? and password=?";
         $arr = array($this->POST("email"), $this->POST("password"));
         
-        $this->loggedIn = $this->hasData($cmd, $arr);
-        return $this->loggedIn;
-    }
-
-    public function logOut(){
-        $this->loggedIn = false;
+        return $this->hasData($cmd, $arr);        
     }
 
     public function register(){

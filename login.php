@@ -5,6 +5,10 @@
    include_once "./templates/header.php";
    include_once "./templates/navbar.php";
 
+   if(isset($_GET["logout"])){
+    $_SESSION["loggedin"] = false;
+   }
+
    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]){
     header("Location: ./dashboard.php");       
     exit;

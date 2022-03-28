@@ -4,8 +4,7 @@
     header('Access-Control-Allow-Origin: *');
 
     $method = $_SERVER['REQUEST_METHOD'];
-    if ($method === 'OPTIONS') {
-        //header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+    if ($method === 'OPTIONS') {      
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
     }
 
@@ -15,7 +14,7 @@
 
     $pageTitle = "CryptoAdvantage | Dashboard";
     include_once "./templates/header.php";
-    include_once "./templates/navbar.php";
+    include_once "./templates/navbar_stduser.php";
 
     $database = new Database();
     $db = $database->connect(); 
