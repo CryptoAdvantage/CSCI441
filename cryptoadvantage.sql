@@ -5340,16 +5340,29 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `Email`, `Phone`, `SecurityKey`, `Password`, `Permission`) VALUES
-(1, 'andy@madeupaddy.net', '3374605272', 'S_KEY_354', 'Pass_905', 1),
-(2, 'cjr@cjruder.net', '2879358940', 'S_KEY_570', 'password123456!', 2),
-(3, 'jenny@madeupaddy.net', '8051605400', 'S_KEY_243', 'Pass_888', 1),
-(4, 'becky@madeupaddy.net', '2644401133', 'S_KEY_957', 'Pass_221', 1),
-(5, 'harvey@madeupaddy.net', '1170972632', 'S_KEY_371', 'Pass_322', 1),
-(6, 'lynn@madeupaddy.net', '6789019729', 'S_KEY_572', 'Pass_930', 0),
-(7, 'cora@madeupaddy.net', '6173215598', 'S_KEY_594', 'Pass_375', 0),
-(8, 'warren@madeupaddy.net', '2530985670', 'S_KEY_488', 'Pass_389', 1),
-(9, 'tiffany@madeupaddy.net', '5887994652', 'S_KEY_730', 'Pass_858', 0),
-(10, 'roxie@madeupaddy.net', '7110774695', 'S_KEY_836', 'Pass_987', 1);
+(1, 'andy@madeupaddy.net', '3374605272', 'S_KEY_354', '$2y$10$5VqTZCVytnaiHdUf5AVxjOSu8wF4yK.npDuL0gnCKbNnbxiGCgrBW', 1),
+(2, 'cjr@cjruder.net', '2879358940', 'S_KEY_570', '$2y$10$vAwqfTlAlA5WS33ZyKooD.ZHbYlW620I5T1bQiPPykS8szzdY9TWK!', 2),
+(3, 'jenny@madeupaddy.net', '8051605400', 'S_KEY_243', '$2y$10$TJoRDURxR7gi5wullvu/weSebvG3Cs29L4tgzxNcTHFeD9u06Rzb.', 1),
+(4, 'becky@madeupaddy.net', '2644401133', 'S_KEY_957', '$2y$10$rOvfUZOi5TU.5eiNUx4OBOTsTzwMQWS7zjz/17o6qxflWw8aX5/qS', 1),
+(5, 'harvey@madeupaddy.net', '1170972632', 'S_KEY_371', '$2y$10$L7VFtY3lhu84LTuW8Awh6uityvEKxY.xQDTNbxSByRIEd5CCJ1BJC', 1),
+(6, 'lynn@madeupaddy.net', '6789019729', 'S_KEY_572', '$2y$10$SNEbdfviayhHCsJC1LkZBeE8fK./d/azhx4/TSDPNId6Y.FmR.izm', 0),
+(7, 'cora@madeupaddy.net', '6173215598', 'S_KEY_594', '$2y$10$UxosmBwOrbqnlmMF0fZZC.7G0mrqb7NfYzYCNH9cvaid7sS38rkDC', 0),
+(8, 'warren@madeupaddy.net', '2530985670', 'S_KEY_488', '$2y$10$E6dFBJfF/98Nmij5rcdHu.tdikK9yBLDeY0C.k0YrrkLYkz9mLFXS', 1),
+(9, 'tiffany@madeupaddy.net', '5887994652', 'S_KEY_730', '$2y$10$j6B/ZAfo6kFn4Nu6KPRi5ORRrwlKdf5szuqIUh93Rr.Tx7qnw426y', 0),
+(10, 'roxie@madeupaddy.net', '7110774695', 'S_KEY_836', '$2y$10$rDuPRZquAVbxq4VQ2nkud.3f1O/u4HGbqu4.1xK1e6UAH7TzL2ffe', 1);
+
+-- password data before hashing for testing purposes
+-- (1, 'andy@madeupaddy.net', '3374605272', 'S_KEY_354', 'Pass_905', 1),
+-- (2, 'cjr@cjruder.net', '2879358940', 'S_KEY_570', 'password123456!', 2),
+-- (3, 'jenny@madeupaddy.net', '8051605400', 'S_KEY_243', 'Pass_888', 1),
+-- (4, 'becky@madeupaddy.net', '2644401133', 'S_KEY_957', 'Pass_221', 1),
+-- (5, 'harvey@madeupaddy.net', '1170972632', 'S_KEY_371', 'Pass_322', 1),
+-- (6, 'lynn@madeupaddy.net', '6789019729', 'S_KEY_572', 'Pass_930', 0),
+-- (7, 'cora@madeupaddy.net', '6173215598', 'S_KEY_594', 'Pass_375', 0),
+-- (8, 'warren@madeupaddy.net', '2530985670', 'S_KEY_488', 'Pass_389', 1),
+-- (9, 'tiffany@madeupaddy.net', '5887994652', 'S_KEY_730', 'Pass_858', 0),
+-- (10, 'roxie@madeupaddy.net', '7110774695', 'S_KEY_836', 'Pass_987', 1);
+
 
 --
 -- Indexes for dumped tables

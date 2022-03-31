@@ -1,5 +1,5 @@
 <html>
-<?php   
+<?php
     session_start();
    $pageTitle = "CryptoAdvantage | Login";
    include_once "./templates/header.php";
@@ -10,7 +10,7 @@
    }
 
    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]){
-    header("Location: ./dashboard.php");       
+    header("Location: ./dashboard.php");
     exit;
 }
 ?>
@@ -25,26 +25,26 @@
             </div>
             <div class="input-item">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>                
+                <input type="password" id="password" name="password" required>
             </div>
             <div class="input-item">
-                <input class="btn" type="submit" value="Log in">              
-            </div> 
-            <?php 
+                <input class="btn" type="submit" value="Log in">
+            </div>
+            <?php
                 if(isset($_GET["error"])){
                     echo "<h5>ERROR - Invalid credentials</h5>";
                 }
-            ?>         
+            ?>
         </form>
-        
+
         <div class="other-options">
             <div class="btn">
                 <a href="./register.php">New User</a>
-            </div>  
+            </div>
             <div class="btn">
                 <a href="./forgotpassword.php">Forgot Password</a>
-            </div>           
-        </div>       
+            </div>
+        </div>
     </main>
 </body>
 

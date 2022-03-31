@@ -1,7 +1,7 @@
 <?php
-class User extends BaseModel{    
+class User extends BaseModel{
     public function __construct($db){
-        parent::__construct($db);   
+        parent::__construct($db);
     }
 
     public function exists(){
@@ -12,22 +12,25 @@ class User extends BaseModel{
         return $this->hasParams(array("email", "password"));
     }
 
-    public function logIn(){        
-        if(!$this->exists()) return false;
+    public function logIn(){
+        if(!$this->exists()) return array("loggedin"=>false);
 
-        $cmd = "Select * from user where email=? and password=?";
-        $arr = array($this->POST("email"), $this->POST("password"));
-        
-        return $this->hasData($cmd, $arr);        
+        $getPassCmd = "Select password from user where email=?";
+        $arr = array($this->POST("email"));
+        $pass = $this->execute($getPassCmd, $arr)->fetchAll()[0]['password'];
+
+        if(!password_verify($this->POST("password"), $pass)) return array("loggedin"=>false);
+
+        return array("loggedin"=>true, "email"=>$this->POST("email"));
     }
 
     public function register(){
-        if($this->exists()) return false;        
+        if($this->exists()) return false;
         if(!$this->hasParams(array("email", "phone", "password"))) return false;
 
         $cmd = "Insert into user (`email`, `phone`, `SecurityKey`, `password`) values (?,?,'AutoValue',?)";
-        $arr = array($this->POST("email"), $this->convertPhone(),$this->POST("password"));
-               
+        $arr = array($this->POST("email"), $this->convertPhone(), password_hash($this->POST("password"), PASSWORD_DEFAULT));
+
         $this->execute($cmd, $arr);
 
         return true;

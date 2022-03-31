@@ -3,7 +3,7 @@ class BaseModel{
     private $conn;
 
     public function __construct($db){
-        $this->conn = $db;       
+        $this->conn = $db;
     }
 
     public function GET($label){
@@ -22,13 +22,13 @@ class BaseModel{
         return true;
     }
 
-    public function execute($query, $params = array()){        
+    public function execute($query, $params = array()){
         $stmt = $this->conn->prepare($query);
         for($i = 1; $i <= count($params); $i++){
             $stmt->bindParam($i, $params[$i-1]);
         }
         $stmt->execute();
-        return $stmt;  
+        return $stmt;
     }
 
     public function hasData($query, $params = array()){

@@ -4,26 +4,36 @@
     header('Access-Control-Allow-Origin: *');
 
     $method = $_SERVER['REQUEST_METHOD'];
-    if ($method === 'OPTIONS') {      
+    if ($method === 'OPTIONS') {
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
     }
 
     include_once "./models/BaseModel.php";
     include_once "./config/Database.php";
-    include_once "./models/User.php";    
+    include_once "./models/User.php";
+    include_once "./models/validatedUser.php";
 
     $pageTitle = "CryptoAdvantage | Dashboard";
     include_once "./templates/header.php";
     include_once "./templates/navbar_stduser.php";
 
     $database = new Database();
-    $db = $database->connect(); 
+    $db = $database->connect();
     $user = new User($db);
 
-    if($user->isLogInAttempt()) $_SESSION["loggedin"] = $user->logIn();
-    
+    if($user->isLogInAttempt()) {
+        $attemptedUser = $user->logIn();
+        $_SESSION["loggedin"] = $attemptedUser['loggedin'];
+        if(!$_SESSION["loggedin"]){
+            header("Location: ./login.php?error");
+            exit;
+        }
+        $_SESSION["email"] = $attemptedUser["email"];
+        $validatedUser = new validatedUser($db, $attemptedUser["email"]);
+    }
+
     if(!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
-        header("Location: ./login.php?error");       
+        header("Location: ./login.php?error");
         exit;
     }
 ?>
