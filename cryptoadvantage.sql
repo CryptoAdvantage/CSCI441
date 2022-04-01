@@ -5349,7 +5349,8 @@ INSERT INTO `user` (`ID`, `Email`, `Phone`, `SecurityKey`, `Password`, `Permissi
 (7, 'cora@madeupaddy.net', '6173215598', 'S_KEY_594', '$2y$10$UxosmBwOrbqnlmMF0fZZC.7G0mrqb7NfYzYCNH9cvaid7sS38rkDC', 0),
 (8, 'warren@madeupaddy.net', '2530985670', 'S_KEY_488', '$2y$10$E6dFBJfF/98Nmij5rcdHu.tdikK9yBLDeY0C.k0YrrkLYkz9mLFXS', 1),
 (9, 'tiffany@madeupaddy.net', '5887994652', 'S_KEY_730', '$2y$10$j6B/ZAfo6kFn4Nu6KPRi5ORRrwlKdf5szuqIUh93Rr.Tx7qnw426y', 0),
-(10, 'roxie@madeupaddy.net', '7110774695', 'S_KEY_836', '$2y$10$rDuPRZquAVbxq4VQ2nkud.3f1O/u4HGbqu4.1xK1e6UAH7TzL2ffe', 1);
+(10, 'roxie@madeupaddy.net', '7110774695', 'S_KEY_836', '$2y$10$rDuPRZquAVbxq4VQ2nkud.3f1O/u4HGbqu4.1xK1e6UAH7TzL2ffe', 1),
+(11, 'zach@cryptoadvantage.com', '5555555555', 'AutoValue', '$2y$10$Jkec8OGvmhSnh2Kg9JkR8.13RzpNoV315PuTBHQItVnvAZ1pcYEay', 2);
 
 -- password data before hashing for testing purposes
 -- (1, 'andy@madeupaddy.net', '3374605272', 'S_KEY_354', 'Pass_905', 1),
@@ -5361,7 +5362,8 @@ INSERT INTO `user` (`ID`, `Email`, `Phone`, `SecurityKey`, `Password`, `Permissi
 -- (7, 'cora@madeupaddy.net', '6173215598', 'S_KEY_594', 'Pass_375', 0),
 -- (8, 'warren@madeupaddy.net', '2530985670', 'S_KEY_488', 'Pass_389', 1),
 -- (9, 'tiffany@madeupaddy.net', '5887994652', 'S_KEY_730', 'Pass_858', 0),
--- (10, 'roxie@madeupaddy.net', '7110774695', 'S_KEY_836', 'Pass_987', 1);
+-- (10, 'roxie@madeupaddy.net', '7110774695', 'S_KEY_836', 'Pass_987', 1),
+-- (11, 'zach@cryptoadvantage.com', '5555555555', 'AutoValue', 'zachzach', 2);
 
 
 --

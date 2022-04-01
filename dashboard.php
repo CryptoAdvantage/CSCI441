@@ -19,23 +19,26 @@
 
     $database = new Database();
     $db = $database->connect();
-    $user = new User($db);
+    $user = new User();
 
     if($user->isLogInAttempt()) {
-        $attemptedUser = $user->logIn();
+        $attemptedUser = $user->logIn($db);
         $_SESSION["loggedin"] = $attemptedUser['loggedin'];
         if(!$_SESSION["loggedin"]){
             header("Location: ./login.php?error");
             exit;
         }
-        $_SESSION["email"] = $attemptedUser["email"];
-        $validatedUser = new validatedUser($db, $attemptedUser["email"]);
+        $_SESSION['validatedUser'] = new validatedUser($attemptedUser['Email'], $attemptedUser['ID'], $attemptedUser['Phone'], $attemptedUser['Permission']);
     }
 
     if(!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
         header("Location: ./login.php?error");
         exit;
     }
+
+    $tradeHistory = $_SESSION['validatedUser']->getTradeHistory($db);
+
+    // can use this statment to see trade history: print_r($tradeHistory);
 ?>
 
 <body>

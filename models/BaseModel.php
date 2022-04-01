@@ -1,9 +1,7 @@
 <?php
 class BaseModel{
-    private $conn;
 
-    public function __construct($db){
-        $this->conn = $db;
+    public function __construct(){
     }
 
     public function GET($label){
@@ -22,8 +20,8 @@ class BaseModel{
         return true;
     }
 
-    public function execute($query, $params = array()){
-        $stmt = $this->conn->prepare($query);
+    public function execute($db, $query, $params = array()){
+        $stmt = $db->prepare($query);
         for($i = 1; $i <= count($params); $i++){
             $stmt->bindParam($i, $params[$i-1]);
         }
@@ -31,11 +29,11 @@ class BaseModel{
         return $stmt;
     }
 
-    public function hasData($query, $params = array()){
-        return $this->execute($query, $params)->rowCount() > 0;
+    public function hasData($db, $query, $params = array()){
+        return $this->execute($db, $query, $params)->rowCount() > 0;
     }
 
-    public function getInsertId(){
-        return $this->conn->lastInsertId();
+    public function getInsertId($db){
+        return $db->lastInsertId();
     }
 }
