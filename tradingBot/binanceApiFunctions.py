@@ -4,22 +4,50 @@
 
 import hashlib
 import hmac
-import json
+import pandas as pd
 import logging
 from tkinter import END
 import time
 import requests
 from urllib.parse import urlencode
+from datetime import datetime as dt
+import talib as tal
 
 """ try:
     from urllib import urlencode
 except ImportError:
     from urllib.parse import urlencode """
 
-
 key_data = {}
 
 ENDPOINT = "https://api.binance.us"
+
+cols = ["openTime",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "closeTime",
+        "quoteVolume",
+        "numTrades",
+        "TBBAV",
+        "TBQAV",
+        "ignore"
+]
+
+normed_cols = ['volume_cmf',
+               'volume_mfi',
+               'volatility_dcp',
+               'trend_psar_down_indicator',
+               'trend_psar_up_indicator',
+               'trend_stc',
+               'momentum_rsi',
+               'momentum_stoch_rsi',
+               'momentum_stoch_rsi_k',
+               'momentum_stoch_rsi_d',
+               'momentum_stoch'
+]
 
 logger = logging.getLogger("Trading_bot")
 hdlr = logging.FileHandler('tradingbot.log')
@@ -36,13 +64,6 @@ def initialise(apiKey, secret):
     key_data["apiKey"] = apiKey
     key_data["secret"] = secret
 
-with open('NEEDS TO USE DATA RETRIEVED FROM DATABASE') as data_file:
-    data = json.load(data_file)
-    api_key = data["api_key"]
-    secret_key = data["secret_key"]
-    initialise(api_key, secret_key)
-    print(key_data)
-
 def request(method, path, params=None):
     """ Function: Creates an unsigned request
         ------
@@ -55,8 +76,35 @@ def request(method, path, params=None):
         logger.warning(data['msg'])
     return data
 
+def getData(symbol,interval):
+    """Returns a DataFrame object of requested data"""
+    klines = getKlines(symbol, internal=interval)
+    df = pd.DataFrame(klines, columns=cols)
+    df.openTime = [dt.fromtimestamp(ts / 1000).strftime('%Y-%m-%d %H:%M') for ts in df['openTime']]
+    df.closeTime = [dt.fromtimestamp(ts / 1000).strftime('%Y-%m-%d %H:%M') for ts in df['closeTime']]
+    df.openTime = pd.to_datetime(df.openTime)
+    df.closeTime = pd.to_datetime(df.closeTime)
+    del df['ignore']
+    for col in df.columns:
+        if not 'Time' in col:
+            df[col] = df[col].astype(float)
+    df['sma'] = tal.SMA(df['close'], timeperiod=20)
+    df['upperBand'], df['middleBand'], df['lowerBand'] = tal.BBANDS(df['close'], 20,2,2,0)
+    return df
+
+def getState(df):
+    """Returns if the close price is below, above, or inbetween the bollinger bands"""
+    state = ''
+    if df['close'].iloc[-1] < df['lowerBand'].iloc[-1]:
+        state = 'below'
+    elif df['close'].iloc[-1] > df['upperBand'].iloc[-1]:
+        state = 'above'
+    else:
+        state = 'between'
+    return state
+
 # Get candlestick data
-def klines(symbolPair, internal, **kwargs):
+def getKlines(symbolPair, internal, **kwargs):
     """ Function: Requests candlestick data
         ------
         Params: symbol, interval, startTime, endTime, limit
@@ -64,7 +112,7 @@ def klines(symbolPair, internal, **kwargs):
         RETURNS: Response for candlestick data request"""
     params = {"symbol": symbolPair, "interval": internal}
     params = {**params, **kwargs}
-    data = request("GET", "/api/v1/klines", params)
+    data = request("GET", "/api/v3/klines", params)
     return [{
         "openTime": d[0],
         "open": d[1],
@@ -85,13 +133,12 @@ def signedRequest(method, path, params):
         Params: method, path, params
         ------
         RETURNS: Response for signed request"""
-    if "apiKey" not in key_data or "secret" not in key_data:
-        raise ValueError("Api key and secret key must be set")
+    """ if "apiKey" not in key_data or "secret" not in key_data:
+        raise ValueError("Api key and secret key must be set") """
     query = urlencode(params, doseq=True)
     query += f"&timestamp={int(round(time.time() * 1000))}"
     secret = bytes(key_data["secret"], ("UTF-8"))
     signature = hmac.new(secret, query.encode("UTF-8"), hashlib.sha256).hexdigest()
-    # query += "&signature={}".format(signature)
     query += f"&signature={signature}"
     resp = requests.request(method, ENDPOINT + path + "?" + query,
                             headers={"X-MBX-APIKEY": key_data["apiKey"]})
