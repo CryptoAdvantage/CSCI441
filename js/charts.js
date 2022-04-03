@@ -1,161 +1,302 @@
 var chart = LightweightCharts.createChart(document.getElementById("chart"), {
-    width: 800,
-    height: 400,
-    timeScale: {
-        timeVisible: true,
-        borderColor: '#D1D4DC',
-    },
-    rightPriceScale: {
-        borderColor: '#D1D4DC',
-    },
-    layout: {
-        backgroundColor: '#ffffff',
-        textColor: '#000',
-    },
-    grid: {
-        horzLines: {
-            color: '#F0F3FA',
-        },
-        vertLines: {
-            color: '#F0F3FA',
-        },
-    },
+	width: 800,
+  height: 400,
+	crosshair: {
+		mode: LightweightCharts.CrosshairMode.Normal,
+	},
 });
-  
-var series = chart.addCandlestickSeries({
-    upColor: 'rgb(38,166,154)',
-    downColor: 'rgb(255,82,82)',
-    wickUpColor: 'rgb(38,166,154)',
-    wickDownColor: 'rgb(255,82,82)',
-    borderVisible: false,
-});
-var data = [{ time: {year: 2018, month: 9, day: 22} , open: 29.630237296336794 , high: 35.36950035097501 , low: 26.21522501353531 , close: 30.734997177569916 },
-{ time: {year: 2018, month: 9, day: 23} , open: 32.267626500691215 , high: 34.452661663723774 , low: 26.096868360824704 , close: 29.573918833457004 },
-{ time: {year: 2018, month: 9, day: 24} , open: 27.33996760497746 , high: 35.8060364835531 , low: 27.33996760497746 , close: 33.06283432964511 },
-{ time: {year: 2018, month: 9, day: 25} , open: 31.1654368745013 , high: 31.97284477478497 , low: 26.766743287285593 , close: 27.364979322283386 },
-{ time: {year: 2018, month: 9, day: 26} , open: 29.5901452337888 , high: 32.147919593347474 , low: 27.53289219709677 , close: 29.202912415085272 },
-{ time: {year: 2018, month: 9, day: 27} , open: 27.561741523265923 , high: 35.11649043301526 , low: 25.20035866163233 , close: 31.14520649627546 },
-{ time: {year: 2018, month: 9, day: 28} , open: 31.925975006823798 , high: 31.925975006823798 , low: 28.998500720406675 , close: 29.87723790403876 },
-{ time: {year: 2018, month: 9, day: 29} , open: 30.826956088992475 , high: 34.79463130873015 , low: 25.291546123273097 , close: 28.994812708315987 },
-{ time: {year: 2018, month: 9, day: 30} , open: 31.202920145287838 , high: 33.19178819590413 , low: 23.94419012923956 , close: 31.47253745770869 },
-{ time: {year: 2018, month: 10, day: 1} , open: 26.927794164758666 , high: 34.6744456778885 , low: 26.927794164758666 , close: 31.091122539737423 },
-{ time: {year: 2018, month: 10, day: 2} , open: 26.452041173938298 , high: 34.527917622572154 , low: 26.452041173938298 , close: 27.65703395829094 },
-{ time: {year: 2018, month: 10, day: 3} , open: 27.74629982387605 , high: 29.300441707649835 , low: 23.761300216231263 , close: 29.182874625005628 },
-{ time: {year: 2018, month: 10, day: 4} , open: 30.41599722290526 , high: 31.942643078777103 , low: 27.09925359459428 , close: 30.918477883682872 },
-{ time: {year: 2018, month: 10, day: 5} , open: 25.76549797105683 , high: 33.4650523853759 , low: 25.76549797105683 , close: 28.15984801386293 },
-{ time: {year: 2018, month: 10, day: 6} , open: 27.543404135965382 , high: 30.7227783000902 , low: 25.749951838020884 , close: 29.150903848724184 },
-{ time: {year: 2018, month: 10, day: 7} , open: 29.34759861812077 , high: 31.08503530472835 , low: 23.395022079647823 , close: 25.00923131079722 },
-{ time: {year: 2018, month: 10, day: 8} , open: 27.00266154335036 , high: 29.51599687178633 , low: 23.46749249241176 , close: 28.702932483799707 },
-{ time: {year: 2018, month: 10, day: 9} , open: 25.569958099853594 , high: 27.669071502065417 , low: 25.569958099853594 , close: 25.626920473922613 },
-{ time: {year: 2018, month: 10, day: 10} , open: 24.886919828178304 , high: 27.167620185117006 , low: 23.71595991386752 , close: 23.71595991386752 },
-{ time: {year: 2018, month: 10, day: 11} , open: 26.14124249813686 , high: 29.5638477987916 , low: 20.82341105699825 , close: 25.563138238511257 },
-{ time: {year: 2018, month: 10, day: 12} , open: 22.26412127509447 , high: 27.637685003390743 , low: 20.838507431464958 , close: 22.450517792778047 },
-{ time: {year: 2018, month: 10, day: 13} , open: 25.75099239090953 , high: 28.12000626118839 , low: 21.929748303510852 , close: 22.63015682488669 },
-{ time: {year: 2018, month: 10, day: 14} , open: 25.428132591291497 , high: 25.999229490809693 , low: 22.266121337091555 , close: 23.51047528528147 },
-{ time: {year: 2018, month: 10, day: 15} , open: 25.07416967939059 , high: 25.50535192500713 , low: 21.96666570325133 , close: 21.96666570325133 },
-{ time: {year: 2018, month: 10, day: 16} , open: 24.957206161449307 , high: 26.679727314857256 , low: 20.196753994637245 , close: 21.523347810451863 },
-{ time: {year: 2018, month: 10, day: 17} , open: 23.705184745772733 , high: 26.754094837621004 , low: 18.724184302695104 , close: 20.160857555541725 },
-{ time: {year: 2018, month: 10, day: 18} , open: 21.95610851644136 , high: 22.914889536420105 , low: 19.567733140100472 , close: 22.914889536420105 },
-{ time: {year: 2018, month: 10, day: 19} , open: 23.216357873687972 , high: 25.44815512734246 , low: 19.54787451276509 , close: 20.76851802225937 },
-{ time: {year: 2018, month: 10, day: 20} , open: 19.6289025950405 , high: 24.290702755740412 , low: 19.041541929894358 , close: 22.48608548162324 },
-{ time: {year: 2018, month: 10, day: 21} , open: 23.599000037544915 , high: 26.839019853462844 , low: 20.884129956680898 , close: 22.01878871761756 },
-{ time: {year: 2018, month: 10, day: 22} , open: 24.618502768742008 , high: 28.00099352255492 , low: 23.061935629399088 , close: 23.061935629399088 },
-{ time: {year: 2018, month: 10, day: 23} , open: 23.840701995876866 , high: 28.494382608429564 , low: 23.840701995876866 , close: 25.321841131665526 },
-{ time: {year: 2018, month: 10, day: 24} , open: 27.764925733189372 , high: 31.05550601484776 , low: 22.810929726970702 , close: 30.02406259204889 },
-{ time: {year: 2018, month: 10, day: 25} , open: 29.703149280184604 , high: 34.0185175501095 , low: 26.82967654698301 , close: 32.06834171351323 },
-{ time: {year: 2018, month: 10, day: 26} , open: 29.0251492427822 , high: 36.89478162439007 , low: 28.3502671011196 , close: 32.822663125409356 },
-{ time: {year: 2018, month: 10, day: 27} , open: 35.040777462643284 , high: 35.12524316379231 , low: 26.805156020579663 , close: 34.23626219571325 },
-{ time: {year: 2018, month: 10, day: 28} , open: 31.21349419519032 , high: 35.73068910379853 , low: 31.064101813812698 , close: 34.75020857236565 },
-{ time: {year: 2018, month: 10, day: 29} , open: 32.34914826794689 , high: 42.381605482695505 , low: 30.176750284055878 , close: 39.24138147444552 },
-{ time: {year: 2018, month: 10, day: 30} , open: 38.84583808993371 , high: 41.75165839362154 , low: 33.37106955991806 , close: 35.93904098275507 },
-{ time: {year: 2018, month: 10, day: 31} , open: 37.070183005323564 , high: 44.84460203857022 , low: 35.23671284121251 , close: 36.329972003600034 },
-{ time: {year: 2018, month: 11, day: 1} , open: 43.31997309164893 , high: 48.43216497187469 , low: 38.30881963355285 , close: 41.554948540677586 },
-{ time: {year: 2018, month: 11, day: 2} , open: 41.33946811092929 , high: 46.65347243834853 , low: 37.472215586661335 , close: 39.26832265482503 },
-{ time: {year: 2018, month: 11, day: 3} , open: 44.76468593661226 , high: 44.76468593661226 , low: 40.039672147314235 , close: 43.42106786288436 },
-{ time: {year: 2018, month: 11, day: 4} , open: 49.13160326887013 , high: 49.13160326887013 , low: 40.93648693038296 , close: 42.17817698294767 },
-{ time: {year: 2018, month: 11, day: 5} , open: 50.46706012970579 , high: 54.38104598422352 , low: 38.159930155343616 , close: 47.5899156640143 },
-{ time: {year: 2018, month: 11, day: 6} , open: 48.25899506613569 , high: 48.25899506613569 , low: 45.63208604138365 , close: 45.63208604138365 },
-{ time: {year: 2018, month: 11, day: 7} , open: 52.45484210527629 , high: 57.55979771849961 , low: 45.23447676016779 , close: 46.01127464234881 },
-{ time: {year: 2018, month: 11, day: 8} , open: 53.228216675179624 , high: 54.07804814570622 , low: 40.61161433961706 , close: 47.689867390699014 },
-{ time: {year: 2018, month: 11, day: 9} , open: 46.193099316212816 , high: 56.190537353078824 , low: 45.01246323828753 , close: 49.14012661656766 },
-{ time: {year: 2018, month: 11, day: 10} , open: 50.409245396927986 , high: 52.3082002787041 , low: 41.764144138886394 , close: 52.3082002787041 },
-{ time: {year: 2018, month: 11, day: 11} , open: 48.58146178816203 , high: 52.653922195022126 , low: 47.34031788474959 , close: 47.34031788474959 },
-{ time: {year: 2018, month: 11, day: 12} , open: 46.80040325283692 , high: 56.709349494076804 , low: 45.81605691554122 , close: 45.81605691554122 },
-{ time: {year: 2018, month: 11, day: 13} , open: 46.042722425788355 , high: 58.476056411825695 , low: 46.042722425788355 , close: 51.2300776481609 },
-{ time: {year: 2018, month: 11, day: 14} , open: 53.909068487588385 , high: 60.240990154306715 , low: 45.230741063278664 , close: 51.34529637385427 },
-{ time: {year: 2018, month: 11, day: 15} , open: 53.739609857086606 , high: 53.739609857086606 , low: 44.38017019990068 , close: 47.595960698697894 },
-{ time: {year: 2018, month: 11, day: 16} , open: 52.52688238296145 , high: 60.9220040817774 , low: 44.27700764117003 , close: 55.27309771985698 },
-{ time: {year: 2018, month: 11, day: 17} , open: 54.46100795908005 , high: 57.57937841117058 , low: 49.50543170388487 , close: 49.50543170388487 },
-{ time: {year: 2018, month: 11, day: 18} , open: 51.12284024600029 , high: 57.646718858433026 , low: 48.73280269653226 , close: 51.35457902694444 },
-{ time: {year: 2018, month: 11, day: 19} , open: 53.536130807863266 , high: 53.536130807863266 , low: 51.29649965636722 , close: 52.99088526565045 },
-{ time: {year: 2018, month: 11, day: 20} , open: 50.92761950009885 , high: 57.70671943558014 , low: 46.45030483558741 , close: 52.229112575743066 },
-{ time: {year: 2018, month: 11, day: 21} , open: 49.30035068900293 , high: 58.67691694734525 , low: 44.63563165197862 , close: 58.67691694734525 },
-{ time: {year: 2018, month: 11, day: 22} , open: 54.230476484061036 , high: 59.03831193868438 , low: 50.77849134047791 , close: 59.03831193868438 },
-{ time: {year: 2018, month: 11, day: 23} , open: 57.282420985156854 , high: 60.4869735007396 , low: 44.14116488798797 , close: 57.93461310007337 },
-{ time: {year: 2018, month: 11, day: 24} , open: 54.86833150125539 , high: 64.25102812467448 , low: 52.36616043331222 , close: 52.36616043331222 },
-{ time: {year: 2018, month: 11, day: 25} , open: 51.689239380620386 , high: 64.29747922654688 , low: 50.71498529572432 , close: 60.518206306602394 },
-{ time: {year: 2018, month: 11, day: 26} , open: 55.74863310659164 , high: 60.816819055612584 , low: 46.11238607935206 , close: 59.23044859881929 },
-{ time: {year: 2018, month: 11, day: 27} , open: 52.57406222528308 , high: 64.2058753841427 , low: 48.163404012323305 , close: 60.593847809696896 },
-{ time: {year: 2018, month: 11, day: 28} , open: 57.50710740029724 , high: 60.12123058977347 , low: 49.61839271711267 , close: 53.29152711098895 },
-{ time: {year: 2018, month: 11, day: 29} , open: 57.33581828303538 , high: 58.92432332528284 , low: 53.27790061455899 , close: 57.02787118731709 },
-{ time: {year: 2018, month: 11, day: 30} , open: 57.527445314328595 , high: 67.63249690962569 , low: 49.603261485289146 , close: 54.589123556483656 },
-{ time: {year: 2018, month: 12, day: 1} , open: 59.98835793934424 , high: 65.51917884840141 , low: 52.32535994476165 , close: 62.127135611086565 },
-{ time: {year: 2018, month: 12, day: 2} , open: 52.509550731662536 , high: 58.49971806419494 , low: 52.509550731662536 , close: 54.759948868082255 },
-{ time: {year: 2018, month: 12, day: 3} , open: 58.08470541982317 , high: 62.74987556918568 , low: 47.85627992158991 , close: 58.690428071336406 },
-{ time: {year: 2018, month: 12, day: 4} , open: 58.28482939034761 , high: 69.16675825892361 , low: 57.41588944088662 , close: 57.74515245619454 },
-{ time: {year: 2018, month: 12, day: 5} , open: 60.004299871302464 , high: 65.82447121605708 , low: 53.13330527599658 , close: 57.64488004774012 },
-{ time: {year: 2018, month: 12, day: 6} , open: 61.92746155137417 , high: 64.36944842979646 , low: 49.470442234694225 , close: 59.94404434023895 },
-{ time: {year: 2018, month: 12, day: 7} , open: 63.72235832229121 , high: 66.33649390307095 , low: 49.91822946887207 , close: 63.56396375320479 },
-{ time: {year: 2018, month: 12, day: 8} , open: 56.64594047326664 , high: 65.3730920902599 , low: 52.604389283975664 , close: 60.71684658387917 },
-{ time: {year: 2018, month: 12, day: 9} , open: 58.89798885700999 , high: 68.04578543284373 , low: 58.89798885700999 , close: 63.36111469854223 },
-{ time: {year: 2018, month: 12, day: 10} , open: 58.869685789579826 , high: 70.99828637845869 , low: 52.36901833289119 , close: 63.15473262144694 },
-{ time: {year: 2018, month: 12, day: 11} , open: 57.61362492091653 , high: 66.41975632948531 , low: 50.827182111530895 , close: 61.770769489947064 },
-{ time: {year: 2018, month: 12, day: 12} , open: 57.869332957269656 , high: 66.28374056429257 , low: 57.05028878520954 , close: 63.87762958979595 },
-{ time: {year: 2018, month: 12, day: 13} , open: 68.14347595614306 , high: 73.46304446829079 , low: 50.83319311788897 , close: 66.9144140431443 },
-{ time: {year: 2018, month: 12, day: 14} , open: 56.95907344942102 , high: 68.81432823196859 , low: 56.95907344942102 , close: 60.69722290026252 },
-{ time: {year: 2018, month: 12, day: 15} , open: 69.14662166493828 , high: 69.14662166493828 , low: 58.59143795311565 , close: 66.25235616866007 },
-{ time: {year: 2018, month: 12, day: 16} , open: 64.0373004661208 , high: 72.91321850066319 , low: 52.079104978168345 , close: 65.92678310822487 },
-{ time: {year: 2018, month: 12, day: 17} , open: 68.81814300123497 , high: 69.51927964796873 , low: 62.70935477415118 , close: 65.64565364397754 },
-{ time: {year: 2018, month: 12, day: 18} , open: 63.47554821643351 , high: 73.6284398311906 , low: 58.996882824636856 , close: 58.996882824636856 },
-{ time: {year: 2018, month: 12, day: 19} , open: 69.97765183896102 , high: 69.97765183896102 , low: 58.73355952507237 , close: 58.73355952507237 },
-{ time: {year: 2018, month: 12, day: 20} , open: 63.22638756186111 , high: 65.67137242291682 , low: 59.9542779777421 , close: 61.20003065016431 },
-{ time: {year: 2018, month: 12, day: 21} , open: 59.690029086102506 , high: 78.08665559197297 , low: 54.862707942292275 , close: 70.58935191024504 },
-{ time: {year: 2018, month: 12, day: 22} , open: 66.29092355620301 , high: 71.82667261213395 , low: 65.28001993201676 , close: 71.82667261213395 },
-{ time: {year: 2018, month: 12, day: 23} , open: 60.92645998120027 , high: 74.21283998861118 , low: 57.331119016099116 , close: 60.36728842356329 },
-{ time: {year: 2018, month: 12, day: 24} , open: 60.211957192084036 , high: 72.37883919241614 , low: 60.211957192084036 , close: 72.37883919241614 },
-{ time: {year: 2018, month: 12, day: 25} , open: 64.80282266865653 , high: 71.00204457933133 , low: 54.58446926152339 , close: 69.9468262738086 },
-{ time: {year: 2018, month: 12, day: 26} , open: 66.28091239894763 , high: 81.00843300529249 , low: 54.56212171317677 , close: 69.58528111643206 },
-{ time: {year: 2018, month: 12, day: 27} , open: 66.38479296949795 , high: 79.97207476893692 , low: 59.738742243860464 , close: 73.77893045661807 },
-{ time: {year: 2018, month: 12, day: 28} , open: 73.80105714462456 , high: 73.80105714462456 , low: 59.95172576316864 , close: 73.49823170047799 },
-{ time: {year: 2018, month: 12, day: 29} , open: 75.65816205696441 , high: 75.65816205696441 , low: 63.710206287837266 , close: 63.710206287837266 },
-{ time: {year: 2018, month: 12, day: 30} , open: 70.43199072631421 , high: 80.48229715762909 , low: 62.65542750589909 , close: 63.42588929424237 },
-{ time: {year: 2018, month: 12, day: 31} , open: 74.18101512382138 , high: 79.0918171034821 , low: 57.80109358134577 , close: 72.91361896511863 }];
-series.setData(data);
 
-var datesForMarkers = [data[data.length - 39], data[data.length - 19]];
-var indexOfMinPrice = 0;
-for (var i = 1; i < datesForMarkers.length; i++) {
-    if (datesForMarkers[i].high < datesForMarkers[indexOfMinPrice].high) {
-        indexOfMinPrice = i;
-    }
+var candleSeries = chart.addCandlestickSeries();
+
+var data = [
+	{ time: '2018-10-19', open: 54.62, high: 55.50, low: 54.52, close: 54.90 },
+	{ time: '2018-10-22', open: 55.08, high: 55.27, low: 54.61, close: 54.98 },
+	{ time: '2018-10-23', open: 56.09, high: 57.47, low: 56.09, close: 57.21 },
+	{ time: '2018-10-24', open: 57.00, high: 58.44, low: 56.41, close: 57.42 },
+	{ time: '2018-10-25', open: 57.46, high: 57.63, low: 56.17, close: 56.43 },
+	{ time: '2018-10-26', open: 56.26, high: 56.62, low: 55.19, close: 55.51 },
+	{ time: '2018-10-29', open: 55.81, high: 57.15, low: 55.72, close: 56.48 },
+	{ time: '2018-10-30', open: 56.92, high: 58.80, low: 56.92, close: 58.18 },
+	{ time: '2018-10-31', open: 58.32, high: 58.32, low: 56.76, close: 57.09 },
+	{ time: '2018-11-01', open: 56.98, high: 57.28, low: 55.55, close: 56.05 },
+	{ time: '2018-11-02', open: 56.34, high: 57.08, low: 55.92, close: 56.63 },
+	{ time: '2018-11-05', open: 56.51, high: 57.45, low: 56.51, close: 57.21 },
+	{ time: '2018-11-06', open: 57.02, high: 57.35, low: 56.65, close: 57.21 },
+	{ time: '2018-11-07', open: 57.55, high: 57.78, low: 57.03, close: 57.65 },
+	{ time: '2018-11-08', open: 57.70, high: 58.44, low: 57.66, close: 58.27 },
+	{ time: '2018-11-09', open: 58.32, high: 59.20, low: 57.94, close: 58.46 },
+	{ time: '2018-11-12', open: 58.84, high: 59.40, low: 58.54, close: 58.72 },
+	{ time: '2018-11-13', open: 59.09, high: 59.14, low: 58.32, close: 58.66 },
+	{ time: '2018-11-14', open: 59.13, high: 59.32, low: 58.41, close: 58.94 },
+	{ time: '2018-11-15', open: 58.85, high: 59.09, low: 58.45, close: 59.08 },
+	{ time: '2018-11-16', open: 59.06, high: 60.39, low: 58.91, close: 60.21 },
+	{ time: '2018-11-19', open: 60.25, high: 61.32, low: 60.18, close: 60.62 },
+	{ time: '2018-11-20', open: 61.03, high: 61.58, low: 59.17, close: 59.46 },
+	{ time: '2018-11-21', open: 59.26, high: 59.90, low: 58.88, close: 59.16 },
+	{ time: '2018-11-23', open: 58.86, high: 59.00, low: 58.29, close: 58.64 },
+	{ time: '2018-11-26', open: 58.64, high: 59.51, low: 58.31, close: 59.17 },
+	{ time: '2018-11-27', open: 59.21, high: 60.70, low: 59.18, close: 60.65 },
+	{ time: '2018-11-28', open: 60.70, high: 60.73, low: 59.64, close: 60.06 },
+	{ time: '2018-11-29', open: 59.42, high: 59.79, low: 59.26, close: 59.45 },
+	{ time: '2018-11-30', open: 59.57, high: 60.37, low: 59.48, close: 60.30 },
+	{ time: '2018-12-03', open: 59.50, high: 59.75, low: 57.69, close: 58.16 },
+	{ time: '2018-12-04', open: 58.10, high: 59.40, low: 57.96, close: 58.09 },
+	{ time: '2018-12-06', open: 58.18, high: 58.64, low: 57.16, close: 58.08 },
+	{ time: '2018-12-07', open: 57.91, high: 58.43, low: 57.34, close: 57.68 },
+	{ time: '2018-12-10', open: 57.80, high: 58.37, low: 56.87, close: 58.27 },
+	{ time: '2018-12-11', open: 58.77, high: 59.40, low: 58.63, close: 58.85 },
+	{ time: '2018-12-12', open: 57.79, high: 58.19, low: 57.23, close: 57.25 },
+	{ time: '2018-12-13', open: 57.00, high: 57.50, low: 56.81, close: 57.09 },
+	{ time: '2018-12-14', open: 56.95, high: 57.50, low: 56.75, close: 57.08 },
+	{ time: '2018-12-17', open: 57.06, high: 57.31, low: 55.53, close: 55.95 },
+	{ time: '2018-12-18', open: 55.94, high: 56.69, low: 55.31, close: 55.65 },
+	{ time: '2018-12-19', open: 55.72, high: 56.92, low: 55.50, close: 55.86 },
+	{ time: '2018-12-20', open: 55.92, high: 56.01, low: 54.26, close: 55.07 },
+	{ time: '2018-12-21', open: 54.84, high: 56.53, low: 54.24, close: 54.92 },
+	{ time: '2018-12-24', open: 54.68, high: 55.04, low: 52.94, close: 53.05 },
+	{ time: '2018-12-26', open: 53.23, high: 54.47, low: 52.40, close: 54.44 },
+	{ time: '2018-12-27', open: 54.31, high: 55.17, low: 53.35, close: 55.15 },
+	{ time: '2018-12-28', open: 55.37, high: 55.86, low: 54.90, close: 55.27 },
+	{ time: '2018-12-31', open: 55.53, high: 56.23, low: 55.07, close: 56.22 },
+	{ time: '2019-01-02', open: 56.16, high: 56.16, low: 55.28, close: 56.02 },
+	{ time: '2019-01-03', open: 56.30, high: 56.99, low: 56.06, close: 56.22 },
+	{ time: '2019-01-04', open: 56.49, high: 56.89, low: 55.95, close: 56.36 },
+	{ time: '2019-01-07', open: 56.76, high: 57.26, low: 56.55, close: 56.72 },
+	{ time: '2019-01-08', open: 57.27, high: 58.69, low: 57.05, close: 58.38 },
+	{ time: '2019-01-09', open: 57.68, high: 57.72, low: 56.85, close: 57.05 },
+	{ time: '2019-01-10', open: 57.29, high: 57.70, low: 56.87, close: 57.60 },
+	{ time: '2019-01-11', open: 57.84, high: 58.26, low: 57.42, close: 58.02 },
+	{ time: '2019-01-14', open: 57.83, high: 58.15, low: 57.67, close: 58.03 },
+	{ time: '2019-01-15', open: 57.74, high: 58.29, low: 57.58, close: 58.10 },
+	{ time: '2019-01-16', open: 57.93, high: 57.93, low: 57.00, close: 57.08 },
+	{ time: '2019-01-17', open: 57.16, high: 57.40, low: 56.21, close: 56.83 },
+	{ time: '2019-01-18', open: 56.92, high: 57.47, low: 56.84, close: 57.09 },
+	{ time: '2019-01-22', open: 57.23, high: 57.39, low: 56.40, close: 56.99 },
+	{ time: '2019-01-23', open: 56.98, high: 57.87, low: 56.93, close: 57.76 },
+	{ time: '2019-01-24', open: 57.61, high: 57.65, low: 56.50, close: 57.07 },
+	{ time: '2019-01-25', open: 57.18, high: 57.47, low: 56.23, close: 56.40 },
+	{ time: '2019-01-28', open: 56.12, high: 56.22, low: 54.80, close: 55.07 },
+	{ time: '2019-01-29', open: 53.62, high: 54.30, low: 52.97, close: 53.28 },
+	{ time: '2019-01-30', open: 53.10, high: 54.02, low: 52.28, close: 54.00 },
+	{ time: '2019-01-31', open: 54.05, high: 55.19, low: 53.53, close: 55.06 },
+	{ time: '2019-02-01', open: 55.21, high: 55.30, low: 54.47, close: 54.55 },
+	{ time: '2019-02-04', open: 54.60, high: 54.69, low: 53.67, close: 54.04 },
+	{ time: '2019-02-05', open: 54.10, high: 54.34, low: 53.61, close: 54.14 },
+	{ time: '2019-02-06', open: 54.11, high: 54.37, low: 53.68, close: 53.79 },
+	{ time: '2019-02-07', open: 53.61, high: 53.73, low: 53.02, close: 53.57 },
+	{ time: '2019-02-08', open: 53.36, high: 53.96, low: 53.30, close: 53.95 },
+	{ time: '2019-02-11', open: 54.13, high: 54.37, low: 53.86, close: 54.05 },
+	{ time: '2019-02-12', open: 54.45, high: 54.77, low: 54.19, close: 54.42 },
+	{ time: '2019-02-13', open: 54.35, high: 54.77, low: 54.28, close: 54.48 },
+	{ time: '2019-02-14', open: 54.38, high: 54.52, low: 53.95, close: 54.03 },
+	{ time: '2019-02-15', open: 54.48, high: 55.19, low: 54.32, close: 55.16 },
+	{ time: '2019-02-19', open: 55.06, high: 55.66, low: 54.82, close: 55.44 },
+	{ time: '2019-02-20', open: 55.37, high: 55.91, low: 55.24, close: 55.76 },
+	{ time: '2019-02-21', open: 55.55, high: 56.72, low: 55.46, close: 56.15 },
+	{ time: '2019-02-22', open: 56.43, high: 57.13, low: 56.40, close: 56.92 },
+	{ time: '2019-02-25', open: 57.00, high: 57.27, low: 56.55, close: 56.78 },
+	{ time: '2019-02-26', open: 56.82, high: 57.09, low: 56.46, close: 56.64 },
+	{ time: '2019-02-27', open: 56.55, high: 56.73, low: 56.35, close: 56.72 },
+	{ time: '2019-02-28', open: 56.74, high: 57.61, low: 56.72, close: 56.92 },
+	{ time: '2019-03-01', open: 57.02, high: 57.15, low: 56.35, close: 56.96 },
+	{ time: '2019-03-04', open: 57.15, high: 57.34, low: 55.66, close: 56.24 },
+	{ time: '2019-03-05', open: 56.09, high: 56.17, low: 55.51, close: 56.08 },
+	{ time: '2019-03-06', open: 56.19, high: 56.42, low: 55.45, close: 55.68 },
+	{ time: '2019-03-07', open: 55.76, high: 56.40, low: 55.72, close: 56.30 },
+	{ time: '2019-03-08', open: 56.36, high: 56.68, low: 56.00, close: 56.53 },
+	{ time: '2019-03-11', open: 56.76, high: 57.62, low: 56.75, close: 57.58 },
+	{ time: '2019-03-12', open: 57.63, high: 58.11, low: 57.36, close: 57.43 },
+	{ time: '2019-03-13', open: 57.37, high: 57.74, low: 57.34, close: 57.66 },
+	{ time: '2019-03-14', open: 57.71, high: 58.09, low: 57.51, close: 57.95 },
+	{ time: '2019-03-15', open: 58.04, high: 58.51, low: 57.93, close: 58.39 },
+	{ time: '2019-03-18', open: 58.27, high: 58.32, low: 57.56, close: 58.07 },
+	{ time: '2019-03-19', open: 58.10, high: 58.20, low: 57.31, close: 57.50 },
+	{ time: '2019-03-20', open: 57.51, high: 58.05, low: 57.11, close: 57.67 },
+	{ time: '2019-03-21', open: 57.58, high: 58.49, low: 57.57, close: 58.29 },
+	{ time: '2019-03-22', open: 58.16, high: 60.00, low: 58.13, close: 59.76 },
+	{ time: '2019-03-25', open: 59.63, high: 60.19, low: 59.53, close: 60.08 },
+	{ time: '2019-03-26', open: 60.30, high: 60.69, low: 60.17, close: 60.63 },
+	{ time: '2019-03-27', open: 60.56, high: 61.19, low: 60.48, close: 60.88 },
+	{ time: '2019-03-28', open: 60.88, high: 60.89, low: 58.44, close: 59.08 },
+	{ time: '2019-03-29', open: 59.20, high: 59.27, low: 58.32, close: 59.13 },
+	{ time: '2019-04-01', open: 59.39, high: 59.41, low: 58.79, close: 59.09 },
+	{ time: '2019-04-02', open: 59.22, high: 59.23, low: 58.34, close: 58.53 },
+	{ time: '2019-04-03', open: 58.78, high: 59.07, low: 58.41, close: 58.87 },
+	{ time: '2019-04-04', open: 58.84, high: 59.10, low: 58.77, close: 58.99 },
+	{ time: '2019-04-05', open: 59.02, high: 59.09, low: 58.82, close: 59.09 },
+	{ time: '2019-04-08', open: 59.02, high: 59.13, low: 58.72, close: 59.13 },
+	{ time: '2019-04-09', open: 58.37, high: 58.56, low: 58.04, close: 58.40 },
+	{ time: '2019-04-10', open: 58.40, high: 58.70, low: 58.36, close: 58.61 },
+	{ time: '2019-04-11', open: 58.65, high: 58.73, low: 58.20, close: 58.56 },
+	{ time: '2019-04-12', open: 58.75, high: 58.79, low: 58.52, close: 58.74 },
+	{ time: '2019-04-15', open: 58.91, high: 58.95, low: 58.59, close: 58.71 },
+	{ time: '2019-04-16', open: 58.79, high: 58.98, low: 58.66, close: 58.79 },
+	{ time: '2019-04-17', open: 58.40, high: 58.46, low: 57.64, close: 57.78 },
+	{ time: '2019-04-18', open: 57.51, high: 58.20, low: 57.28, close: 58.04 },
+	{ time: '2019-04-22', open: 58.14, high: 58.49, low: 57.89, close: 58.37 },
+	{ time: '2019-04-23', open: 57.62, high: 57.72, low: 56.30, close: 57.15 },
+	{ time: '2019-04-24', open: 57.34, high: 57.57, low: 56.73, close: 57.08 },
+	{ time: '2019-04-25', open: 56.82, high: 56.90, low: 55.75, close: 55.85 },
+	{ time: '2019-04-26', open: 56.06, high: 56.81, low: 55.83, close: 56.58 },
+	{ time: '2019-04-29', open: 56.75, high: 57.17, low: 56.71, close: 56.84 },
+	{ time: '2019-04-30', open: 56.99, high: 57.45, low: 56.76, close: 57.19 },
+	{ time: '2019-05-01', open: 57.23, high: 57.30, low: 56.52, close: 56.52 },
+	{ time: '2019-05-02', open: 56.81, high: 58.23, low: 56.68, close: 56.99 },
+	{ time: '2019-05-03', open: 57.15, high: 57.36, low: 56.87, close: 57.24 },
+	{ time: '2019-05-06', open: 56.83, high: 57.09, low: 56.74, close: 56.91 },
+	{ time: '2019-05-07', open: 56.69, high: 56.81, low: 56.33, close: 56.63 },
+	{ time: '2019-05-08', open: 56.66, high: 56.70, low: 56.25, close: 56.38 },
+	{ time: '2019-05-09', open: 56.12, high: 56.56, low: 55.93, close: 56.48 },
+	{ time: '2019-05-10', open: 56.49, high: 57.04, low: 56.26, close: 56.91 },
+	{ time: '2019-05-13', open: 56.72, high: 57.34, low: 56.66, close: 56.75 },
+	{ time: '2019-05-14', open: 56.76, high: 57.19, low: 56.50, close: 56.55 },
+	{ time: '2019-05-15', open: 56.51, high: 56.84, low: 56.17, close: 56.81 },
+	{ time: '2019-05-16', open: 57.00, high: 57.80, low: 56.82, close: 57.38 },
+	{ time: '2019-05-17', open: 57.06, high: 58.48, low: 57.01, close: 58.09 },
+	{ time: '2019-05-20', open: 59.15, high: 60.54, low: 58.00, close: 59.01 },
+	{ time: '2019-05-21', open: 59.10, high: 59.63, low: 58.76, close: 59.50 },
+	{ time: '2019-05-22', open: 59.09, high: 59.37, low: 58.96, close: 59.25 },
+	{ time: '2019-05-23', open: 59.00, high: 59.27, low: 58.54, close: 58.87 },
+	{ time: '2019-05-24', open: 59.07, high: 59.36, low: 58.67, close: 59.32 },
+	{ time: '2019-05-28', open: 59.21, high: 59.66, low: 59.02, close: 59.57 },
+];
+
+candleSeries.setData(data);
+
+var lastClose = data[data.length - 1].close;
+var lastIndex = data.length - 1;
+
+var targetIndex = lastIndex + 105 + Math.round(Math.random() + 30);
+var targetPrice = getRandomPrice();
+
+var currentIndex = lastIndex + 1;
+var currentBusinessDay = { day: 29, month: 5, year: 2019 };
+var ticksInCurrentBar = 0;
+var currentBar = {
+	open: null,
+	high: null,
+	low: null,
+	close: null,
+	time: currentBusinessDay,
+};
+
+function mergeTickToBar(price) {
+	if (currentBar.open === null) {
+		currentBar.open = price;
+		currentBar.high = price;
+		currentBar.low = price;
+		currentBar.close = price;
+	} else {
+		currentBar.close = price;
+		currentBar.high = Math.max(currentBar.high, price);
+		currentBar.low = Math.min(currentBar.low, price);
+	}
+	candleSeries.update(currentBar);
 }
 
-var markers = [{ time: data[data.length - 48].time, position: 'aboveBar', color: '#f68410', shape: 'circle', text: 'D' }];
-for (var i = 0; i < datesForMarkers.length; i++) {
-    if (i !== indexOfMinPrice) {
-        markers.push({ time: datesForMarkers[i].time, position: 'aboveBar', color: '#e91e63', shape: 'arrowDown', text: 'Sell @ ' + Math.floor(datesForMarkers[i].high + 2) });
-    } else {
-        markers.push({ time: datesForMarkers[i].time, position: 'belowBar', color: '#2196F3', shape: 'arrowUp', text: 'Buy @ ' + Math.floor(datesForMarkers[i].low - 2) });
-    }
-}
-series.setMarkers(markers);
+function reset() {
+	candleSeries.setData(data);
+	lastClose = data[data.length - 1].close;
+	lastIndex = data.length - 1;
 
-let tradingPair = "btcusd";
-let interval = "1h";
-//let binanceSocket = new WebSocket(`wss://stream.binance.us:9443/ws/${tradingPair}@kline_${interval}`);
-/*var binanceSocket = new WebSocket(`wss://stream.binance.us:9443/ws/btcusd@kline_1h`);
-var klines = document.getElementById('klines')
-binanceSocket.addEventListener('message', function (event) {
-    let message = JSON.parse((event.data));
-    klines.append(message)
-});*/
+	targetIndex = lastIndex + 5 + Math.round(Math.random() + 30);
+	targetPrice = getRandomPrice();
+
+	currentIndex = lastIndex + 1;
+	currentBusinessDay = { day: 29, month: 5, year: 2019 };
+	ticksInCurrentBar = 0;
+}
+
+function getRandomPrice() {
+	return 10 + Math.round(Math.random() * 10000) / 100;
+}
+
+function nextBusinessDay(time) {
+	var d = new Date();
+	d.setUTCFullYear(time.year);
+	d.setUTCMonth(time.month - 1);
+	d.setUTCDate(time.day + 1);
+	d.setUTCHours(0, 0, 0, 0);
+	return {
+		year: d.getUTCFullYear(),
+		month: d.getUTCMonth() + 1,
+		day: d.getUTCDate(),
+	};
+}
+
+setInterval(function() {
+	var deltaY = targetPrice - lastClose;
+	var deltaX = targetIndex - lastIndex;
+	var angle = deltaY / deltaX;
+	var basePrice = lastClose + (currentIndex - lastIndex) * angle;
+	var noise = (0.1 - Math.random() * 0.2) + 1.0;
+	var noisedPrice = basePrice * noise;
+	mergeTickToBar(noisedPrice);
+	if (++ticksInCurrentBar === 5) {
+		// move to next bar
+		currentIndex++;
+		currentBusinessDay = nextBusinessDay(currentBusinessDay);
+		currentBar = {
+			open: null,
+			high: null,
+			low: null,
+			close: null,
+			time: currentBusinessDay,
+		};
+		ticksInCurrentBar = 0;
+		if (currentIndex === 5000) {
+			reset();
+			return;
+		}
+		if (currentIndex === targetIndex) {
+			// change trend
+			lastClose = noisedPrice;
+			lastIndex = currentIndex;
+			targetIndex = lastIndex + 5 + Math.round(Math.random() + 30);
+			targetPrice = getRandomPrice();
+		}
+	}
+}, 200);
+
+let dataStream = [];
+function klineStream() {
+    /* const Http = new XMLHttpRequest();
+    const url='https://api.binance.us/api/v3/klines?symbol=BTCUSD&interval=1d';
+    Http.open("GET", url);
+    Http.send();
+
+    Http.onreadystatechange = (e) => {
+        let response = JSON.parse(Http.responseText);
+        for (let i = 0; i < response.length-1; i++) {
+            let timestamp = response[i][0];
+            let t = getTime(timestamp/1000);
+            let o = parseFloat(response[i][1]);
+            let h = parseFloat(response[i][2]);
+            let l = parseFloat(response[i][3]);
+            let c = parseFloat(response[i][4]);
+            let data = { time: t , open: o , high: h , low: l , close: c };
+            dataStream.push(data);
+        }; */
+
+    var binanceSocket = new WebSocket(`wss://stream.binance.us:9443/ws/btcusd@kline_1h`);
+    binanceSocket.addEventListener('message', function (event) {
+        let message = JSON.parse(event.data);
+        let timestamp = message['k']['t'];
+        let t = getTime(timestamp);
+        let o = parseFloat(message['k']['o']);
+        let h = parseFloat(message['k']['h']);
+        let l = parseFloat(message['k']['l']);
+        let c = parseFloat(message['k']['c']);
+        let data = { time: t , open: o , high: h , low: l , close: c };
+        dataStream.push(data);
+        console.log(dataStream);
+    }); 
+};
+
+function getTime(ts){
+    let date = new Date(ts);
+    dateObject = { year: date.getFullYear() , month: date.getMonth()+1 , day: date.getDate() };
+    return dateObject;
+};
+
+document.onload = klineStream();
