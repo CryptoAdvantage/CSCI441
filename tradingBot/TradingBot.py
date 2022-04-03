@@ -1,5 +1,6 @@
 import binanceApiFunctions as baf
 from datetime import datetime as dt
+import time
 
 class TradingBot:
     def __init__(self, amount, token1, token2, trade_fee, interval):
@@ -49,16 +50,16 @@ class TradingBot:
         print(f"Buys List: {self.buys}")
         print(f"Sells List: {self.sells}")
         print(f"Trade Fee x: {self.trade_fee}")
-
-        self.buy(self.token, 40000.0, dt.now())
+        time.sleep(10)
+        self.buy(self.token, 40000.0, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
         print("\n***After Buy Order***\n")
         print(f"Amount: {self.amount}")
         print(f"Token: {self.token}")
         print(f"Current Token: {self.curr_token}")
         print(f"Buys List: {self.buys}")
         print(f"Sells List: {self.sells}")
-
-        self.sell(self.token, 50000.0, dt.now())
+        time.sleep(10)
+        self.sell(self.token, 50000.0, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
         print("\n***After Sell Order***\n")
         print(f"Amount: {self.amount}")
         print(f"Token: {self.token}")
