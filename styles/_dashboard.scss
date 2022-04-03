@@ -1,3 +1,39 @@
 img.dashboard{
-    width: 90vw;
+    width: 10vw;
+}
+
+div.user {
+    border: 1px;
+    border-style:solid;
+    border-color: black;
+    border-width: 1px;
+    text-align: left;
+    align-self:stretch;
+}
+
+div.bitcoin {
+    text-align: left;
+}
+
+div.etherum {
+    text-align: center;
+}
+
+div.trading-bot1
+{
+    border-style: dashed;
+    border-color: black;
+    float: left;
+}
+div.trading-bot2
+{
+    border-style: dashed;
+    border-color: black;
+    float: left;
+}
+div.trading-bot3
+{
+    border-style: dashed;
+    border-color: black;
+    float: right;
 }
