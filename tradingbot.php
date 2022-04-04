@@ -1,6 +1,6 @@
 <html>
 <?php
-    session_start();
+    //session_start();
     $pageTitle = "CryptoAdvantage | Bot Creator";
     include_once "./templates/header.php";
     include_once "./templates/navbar.php";
@@ -26,7 +26,4 @@
        <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
        <script src="./js/charts.js"></script>
    </body>
-<?php
-   include_once "./templates/footer.php"
-?>
 </html>
