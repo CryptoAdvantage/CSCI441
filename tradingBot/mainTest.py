@@ -42,6 +42,5 @@ def testRun():
     print("\n\nTesting the Trading Bot loop structure:\nTesting . . .\n")
     test.testBotLoop(token1, token2, interval)
     
-      
 if __name__ == "__main__":
     testRun()
