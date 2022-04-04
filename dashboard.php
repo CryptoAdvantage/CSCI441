@@ -1,4 +1,5 @@
 <html>
+<link id="primary-css" rel="stylesheet" href="./styles/_dashboard.scss">
 <?php
     session_start();
     header('Access-Control-Allow-Origin: *');
@@ -44,7 +45,51 @@
 <body>
     <main>
         <h1>CryptoAdvantage Dashboard</h1>
-        <img class="dashboard" src="./images/dashboard.png" alt="Dashboard placeholder">
+
+        <div class = "user"> 
+            <?php
+            //This is where we will put the how much of each cryptocurrency the user has. We should store this in a database so that way we can pull it and keep it updated.
+            ?>
+            <h3> Your Crypto: </h3>
+            <div class = "user-label">
+                <label> Bitcoin: </label>
+                <p> 1.32</p>
+            </div>
+            <div class = "user-label">
+                <label> Ethereum: </label>
+                <p> 0.45</p>
+            </div>
+            <div class = "user-label">
+            <label> Rippple: </label>
+            <p> 1.98</p>
+            </div>
+
+
+        </div>
+
+        <div class = "trade-history">
+            <table>
+            <?php 
+            print_r($tradeHistory);
+            //This should print the trade history for the user. 
+            ?>
+            </table>
+        </div>
+        <div class = "trading-bots">
+            <div class = "trading-bot1">
+                <p> place holder for trading bot 1 </p>
+                <button class = "start-trade"> Trade </button>
+            </div>
+            <div class = "trading-bot2">
+                <p> place holder for trading bot 2 </p>
+                <button class = "start-trade"> Trade </button>
+            </div>
+            <div class = "trading-bot3">
+                <p> Place holder for trading bot 3</p>
+                <button class = "start-trade"> Trade </button>
+
+            </div>
+        </div>
     </main>
 </body>
 
@@ -52,3 +97,4 @@
    include_once "./templates/footer.php"
 ?>
 </html>
+
