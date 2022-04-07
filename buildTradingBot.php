@@ -4,33 +4,20 @@
      $pageTitle = "CryptoAdvantage | Bot Creator";
      include_once "./templates/header.php";
      include_once "./templates/navbar.php";
+
+    $botName = (array_key_exists("bot", $_POST)) ? $_POST["bot"] : "";
+    $exchange = (array_key_exists("exchange", $_POST)) ? $_POST["exchange"] : "";
+    $token1 = (array_key_exists("token1", $_POST)) ? $_POST["token1"] : "";
+    $token2 = (array_key_exists("token2", $_POST)) ? $_POST["token2"] : "";
+    $interval = (array_key_exists("interval", $_POST)) ? $_POST["interval"] : "";
+    $strategy = (array_key_exists("strategy", $_POST)) ? $_POST["strategy"] : "";
     
-    $botName = $exchange = $token1 = $token2 = $tradePair = $interval = $strategy = "";
-
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $botName = test_input($_POST["bot name"]);
-        $exchange = test_input($_POST["exchange"]);
-        $token1 = test_input($_POST["token 1"]);
-        $token2 = test_input($_POST["token 2"]);
-        $interval = test_input($_POST["interval"]);
-        $strategy = test_input($_POST["strategy"]);
-        $tradePair = $token1 + $token2;
-        $url = `wss://stream.binance.us:9443/ws/${trading_pair}@kline_${interval}`;
-       }
-   
-       function test_input($data) {
-           $data = trim($data);
-           $data = stripslashes($data);
-           $data = htmlspecialchars($data);
-           return $data;
-       }
    ?>
    
    <body>
        <main>
            <h2>Trading Bot Creator</h2>
-           <form method="post" class="entry-form" action="./dashboard.php">  
+           <form method="POST" class="entry-form" action="./buildTradingBot.php">  
                <div class="input-item">
                    <label for="bot">Bot Name:</label>
                    <input type="text" id="bot" name="bot" required>
@@ -97,6 +84,20 @@
                    <input class="btn" type="submit" value="Submit">
                </div>
            </form>
+           <div>
+               <?php
+                    if($_POST){
+                        echo "Posted<br>";
+                        $command = escapeshellcmd('python bot_api.py');
+                        $output = shell_exec($command);
+                        echo $output;
+                        
+                    }
+                    /* if($__POST){
+                        echo shell_exec(`/usr/bin/python ./tradingBot/bot_api.py ${botName} ${exchange} ${token1} ${token2} ${interval} ${strategy}`);
+                    } */
+               ?>
+           </div>
        </main>
    </body>
 <?php
