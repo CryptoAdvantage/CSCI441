@@ -6,12 +6,12 @@ import sys
 try:
     import TradingBot as tb
 except:
-    print("Error importing TradingBot class!")
+    print("Error importing TradingBot class! <br>")
 
 try:
     import binanceApiFunctions as baf
 except:
-    print("Error imprting binance api functions!")
+    print("Error imprting binance api functions! <br>")
 
 try:
     print("<h3>Inside of Python</h3>")
