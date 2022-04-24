@@ -4,20 +4,12 @@
      $pageTitle = "CryptoAdvantage | Bot Creator";
      include_once "./templates/header.php";
      include_once "./templates/navbar.php";
-
-    $botName = (array_key_exists("bot", $_POST)) ? $_POST["bot"] : "";
-    $exchange = (array_key_exists("exchange", $_POST)) ? $_POST["exchange"] : "";
-    $token1 = (array_key_exists("token1", $_POST)) ? $_POST["token1"] : "";
-    $token2 = (array_key_exists("token2", $_POST)) ? $_POST["token2"] : "";
-    $interval = (array_key_exists("interval", $_POST)) ? $_POST["interval"] : "";
-    $strategy = (array_key_exists("strategy", $_POST)) ? $_POST["strategy"] : "";
-    
    ?>
    
    <body>
        <main>
            <h2>Trading Bot Creator</h2>
-           <form method="POST" class="entry-form" action="./buildTradingBot.php">  
+           <form method="POST" class="entry-form" action="./tradingbot.php">  
                <div class="input-item">
                    <label for="bot">Bot Name:</label>
                    <input type="text" id="bot" name="bot" required>
@@ -84,20 +76,6 @@
                    <input class="btn" type="submit" value="Submit">
                </div>
            </form>
-           <div>
-               <?php
-                    if($_POST){
-                        echo "Posted<br>";
-                        $command = escapeshellcmd('python bot_api.py');
-                        $output = shell_exec($command);
-                        echo $output;
-                        
-                    }
-                    /* if($__POST){
-                        echo shell_exec(`/usr/bin/python ./tradingBot/bot_api.py ${botName} ${exchange} ${token1} ${token2} ${interval} ${strategy}`);
-                    } */
-               ?>
-           </div>
        </main>
    </body>
 <?php
