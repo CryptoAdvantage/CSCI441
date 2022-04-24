@@ -8,7 +8,7 @@ echo "<br>";
 echo "Var2 within PHP= " . $var2;
 echo "<br><br>";
 
-exec("python3 ./tradingBot/testing.py $var1 $var2", $output);
+exec("python ./tradingBot/pythonTest.py $var1 $var2", $output);
 
 foreach($output as $blah){
     echo $blah;
