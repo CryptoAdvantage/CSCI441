@@ -1,6 +1,13 @@
-import binanceApiFunctions as baf
+try:
+    import binanceApiFunctions as baf
+except:
+    print("Error importing binance api functions! <br>")
 from datetime import datetime as dt
 import time
+import sys
+
+print("<h3>Inside of Python tradingBot</h3>")
+print(f"Sys path: {sys.path}")
 
 class TradingBot:
     def __init__(self, balance, token1, token2, trade_fee, interval):

@@ -2,16 +2,60 @@
     Functions list for Binance US API Trading Bot
 """
 
-import hashlib
-import hmac
-import pandas as pd
-import logging
-from tkinter import END
-import time
-import requests
-from urllib.parse import urlencode
-from datetime import datetime as dt
-import talib as tal
+import sys
+sys.path.insert(0, '/home/hammock/anaconda3/lib/python3.9/site-packages')
+try:
+    import hashlib
+except:
+    print("Error importing hashlib module! <br>")
+
+try:
+    import hmac
+except:
+    print("Error importing hmac module! <br>")
+
+try:
+    import pandas as pd
+except:
+    print("Error importing Pandas! <br>")
+
+try:
+    import logging
+except:
+    print("Error imprting logging! <br>")
+
+""" try:
+    from tkinter import END
+except:
+    print("Error importing tkinter! <br>") """
+
+try:
+    import time
+except:
+    print("Error importing time! <br>")
+try:
+    import requests
+except:
+    print("Error importing requests module! <br>")
+
+try:
+    from urllib.parse import urlencode
+except:
+    print("Error importing urlencode! <br>")
+
+try:
+    from datetime import datetime as dt
+except:
+    print("Error importing datetime module! <br>")
+
+try:
+    import TALIB as tal
+except:
+    print("Error importing talib! <br>")
+
+
+print("<h3>Inside of Python binanceApiFunctions</h3>")
+print(f"Sys path: {sys.path}")
 
 """ try:
     from urllib import urlencode
