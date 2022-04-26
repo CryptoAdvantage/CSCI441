@@ -49,7 +49,7 @@ except:
     print("Error importing datetime module! <br>")
 
 try:
-    import TALIB as tal
+    import talib as tal
 except:
     print("Error importing talib! <br>")
 
