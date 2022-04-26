@@ -36,7 +36,7 @@
                     echo "Exchange within PHP= " . $exchange;
                     echo "<br><br>";
                     
-                    exec("python3 ./tradingBot/bot_api.py $botName $exchange $token1 $token2 $interval $strategy", $output);
+                    exec("python ./tradingBot/bot_api.py $botName $exchange $token1 $token2 $interval $strategy", $output);
                     
                     foreach($output as $blah){
                         echo $blah;
