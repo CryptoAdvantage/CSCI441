@@ -14,25 +14,26 @@ except:
     print("Error imprting binance api functions! <br>")
 
 try:
-    print("<h3>Inside of Python</h3>")
-    print("Var1 within Python= ", sys.argv[1], "<br>")
-    print("Var2 within Python= ", sys.argv[2], "<br>")
-    print("Var3 within Python= ", sys.argv[3], "<br>")
-    print("Var4 within Python= ", sys.argv[4], "<br>")
-    print("Var5 within Python= ", sys.argv[5], "<br>")
-    print("Var6 within Python= ", sys.argv[6], "<br>")
-except:
-    print("Error printing variables.")
-
-try:
     botName = sys.argv[1]
     exchange = sys.argv[2]
-    token1 = sys.argv[3]
-    token2 = sys.argv[4]
+    token1 = sys.argv[3].upper()
+    token2 = sys.argv[4].upper()
     interval = sys.argv[5]
     strategy = sys.argv[6]
 except:
     print("Error storing variables.")
+
+try:
+    print("<h3>Inside of Python</h3>")
+    print("Bot Name within Python= ", botName, "<br>")
+    print("Exchange within Python= ", exchange, "<br>")
+    print("Token 1: ", token1, "<br>")
+    print("Token 2: ", token2, "<br>")
+    print("Trading Pair: ", token1+token2, "<br>")
+    print("Interval: ", interval, "<br>")
+    print("Trading Strategy: ", strategy, "<br>")
+except:
+    print("Error printing variables.")
 
 """ print(botName)
 print(exchange)

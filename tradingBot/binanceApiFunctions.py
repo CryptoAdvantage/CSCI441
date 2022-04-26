@@ -53,10 +53,6 @@ try:
 except:
     print("Error importing talib! <br>")
 
-
-print("<h3>Inside of Python binanceApiFunctions</h3>")
-print(f"Sys path: {sys.path}")
-
 """ try:
     from urllib import urlencode
 except ImportError:
