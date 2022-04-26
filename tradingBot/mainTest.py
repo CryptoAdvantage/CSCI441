@@ -1,12 +1,10 @@
 import binanceApiFunctions as baf
 import TradingBot as tb
 import time
-from dotenv import load_dotenv
 import testFunctions as test
 import os
 
-load_dotenv()
-baf.initialise(os.environ.get("API_KEY"), os.environ.get("SECRET_KEY"))
+baf.initialise(ENV['API_KEY'], ENV['SECRET_KEY'])
 
 # starting data
 token1 = 'BTC'

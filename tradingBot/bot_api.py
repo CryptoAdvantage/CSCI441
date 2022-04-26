@@ -20,13 +20,15 @@ try:
     token2 = sys.argv[4].upper()
     interval = sys.argv[5]
     strategy = sys.argv[6]
+    amount = 100
+    tradeFee = 0.99925  # fee per trade multiplier
 except:
     print("Error storing variables.")
 
 try:
     print("<h3>Inside of Python</h3>")
-    print("Bot Name within Python= ", botName, "<br>")
-    print("Exchange within Python= ", exchange, "<br>")
+    print("Bot Name: ", botName, "<br>")
+    print("Exchange: ", exchange, "<br>")
     print("Token 1: ", token1, "<br>")
     print("Token 2: ", token2, "<br>")
     print("Trading Pair: ", token1+token2, "<br>")
@@ -34,6 +36,17 @@ try:
     print("Trading Strategy: ", strategy, "<br>")
 except:
     print("Error printing variables.")
+
+try:
+    baf.initialise(ENV['API_KEY'], ENV['SECRET_KEY'])
+except:
+    print("Error initializing api keys.")
+
+try:
+    testBot = tb.TradingBot(amount, token1, token2, tradeFee, interval)
+    testBot.test()
+except:
+    print("Error with Trading Bot.")
 
 """ print(botName)
 print(exchange)
