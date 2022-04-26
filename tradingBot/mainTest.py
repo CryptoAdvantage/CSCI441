@@ -4,7 +4,7 @@ import time
 import testFunctions as test
 import os
 
-baf.initialise(ENV['API_KEY'], ENV['SECRET_KEY'])
+baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
 
 # starting data
 token1 = 'BTC'

@@ -3,6 +3,7 @@
 #import os
 #import urllib.parse
 import sys
+import os
 try:
     import TradingBot as tb
 except:
@@ -38,7 +39,7 @@ except:
     print("Error printing variables. <br>")
 
 try:
-    baf.initialise(ENV['API_KEY'], ENV['SECRET_KEY'])
+    baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
 except:
     print("Error initializing api keys. <br>")
 
