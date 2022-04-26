@@ -23,7 +23,7 @@ try:
     amount = 100
     tradeFee = 0.99925  # fee per trade multiplier
 except:
-    print("Error storing variables.")
+    print("Error storing variables. <br>")
 
 try:
     print("<h3>Inside of Python</h3>")
@@ -35,18 +35,18 @@ try:
     print("Interval: ", interval, "<br>")
     print("Trading Strategy: ", strategy, "<br>")
 except:
-    print("Error printing variables.")
+    print("Error printing variables. <br>")
 
 try:
     baf.initialise(ENV['API_KEY'], ENV['SECRET_KEY'])
 except:
-    print("Error initializing api keys.")
+    print("Error initializing api keys. <br>")
 
 try:
     testBot = tb.TradingBot(amount, token1, token2, tradeFee, interval)
     testBot.test()
 except:
-    print("Error with Trading Bot.")
+    print("Error with Trading Bot. <br>")
 
 """ print(botName)
 print(exchange)
