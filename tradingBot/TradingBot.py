@@ -3,7 +3,6 @@ try:
 except:
     print("Error importing binance api functions! <br>")
 from datetime import datetime as dt
-import time
 
 class TradingBot:
     def __init__(self, balance, token1, token2, trade_fee, interval):
@@ -22,6 +21,7 @@ class TradingBot:
         self.reset_top()
         
     def buy(self, token, price, time):
+        print("Inside Buy Order...<br>")
         self.balance = (self.balance / price) * self.trade_fee
         #baf.marketBuyOrder(self.trade_pair, self.balance)    # Calls Binance Market Buy Order
         self.buy_test = baf.testNewOrder(self.trade_pair,"BUY","MARKET",quantity=1.0)
@@ -51,7 +51,7 @@ class TradingBot:
         print(f"Trade Pair: {self.trade_pair}<br>")
         print(f"Interval: {self.interval}<br>")
         print(f"Buys List: {self.buys}<br>")
-        print(f"Sells List: {self.sells}")
+        print(f"Sells List: {self.sells}<br>")
         print(f"Trade Fee x: {self.trade_fee}<br>")
         self.buy(self.token, 40000.0, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
         print("<br>***After Buy Order***<br>")
