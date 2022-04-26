@@ -21,7 +21,6 @@ class TradingBot:
         self.reset_top()
         
     def buy(self, token, price, time):
-        print("Inside Buy Order...<br>")
         self.balance = (self.balance / price) * self.trade_fee
         #baf.marketBuyOrder(self.trade_pair, self.balance)    # Calls Binance Market Buy Order
         self.buy_test = baf.testNewOrder(self.trade_pair,"BUY","MARKET",quantity=1.0)
