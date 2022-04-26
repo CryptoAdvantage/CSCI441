@@ -20,9 +20,9 @@ def testOrder(symbolPair):
     testedOrdersStr = ['Market Buy', 'Market Sell', 'Limit Buy', 'Limit Sell']
     for i in range(4):
         if testedOrders[i] == {}:
-            print(f"{testedOrdersStr[i]} Successful!")
+            print(f"{testedOrdersStr[i]} Successful!<br>")
         else:
-            print(f"{testedOrdersStr[i]} Unsuccessful.")
+            print(f"{testedOrdersStr[i]} Unsuccessful.<br>")
 
 def testGetKlines(symbolPair, interval):
     """Testing the Binance API get klines request"""
