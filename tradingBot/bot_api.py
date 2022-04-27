@@ -1,7 +1,3 @@
-
-
-#import os
-#import urllib.parse
 import sys
 import os
 import json
@@ -19,7 +15,7 @@ try:
 except:
     print("Error imprting binance api functions! <br>")
 
-""" try:
+try:
     botName = sys.argv[1]
     exchange = sys.argv[2]
     token1 = sys.argv[3].upper()
@@ -30,9 +26,9 @@ except:
     tradeFee = 0.99925  # fee per trade multiplier
     tradePair = token1+token2
 except:
-    print("Error storing variables. <br>") """
+    print("Error storing variables. <br>")
 
-""" try:
+try:
     print("<h3>Inside of Python</h3>")
     print("Bot Name: ", botName, "<br>")
     print("Exchange: ", exchange, "<br>")
@@ -42,27 +38,4 @@ except:
     print("Interval: ", interval, "<br>")
     print("Trading Strategy: ", strategy, "<br>")
 except:
-    print("Error printing variables. <br>") """
-error = []
-try:
-    token1 = sys.arg[1]
-    token2 = sys.arg[2]
-    interval = sys.arg[3]
-    tradePair = token1+token2
-except:
-    error += "Error storing variables<br>"
-try:
-    baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
-    url = 'https://csci441project.herokuapp.com/tradingbot.php'
-    klines = baf.getKlines(tradePair, internal=interval, limit=1000)
-    x = requests.post(url, json = json.dumps(klines))
-    print(x.text)
-except:
-    error += "Error posting json object"
-
-""" try:
-    url = 'https://csci441project.herokuapp.com/history.php'
-    klines = baf.getKlines(tradePair, internal=interval, limit=1000)
-    requests.post(url, json = json.dumps(klines))
-except:
-    print("Error posting json object") """
+    print("Error printing variables. <br>")
