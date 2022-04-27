@@ -775,7 +775,7 @@ var data = [
 
 candleSeries.setData(data);
 
-var binanceSocket = new WebSocket(`wss://stream.binance.us:9443/ws/btcusd@kline_1m`);
+var binanceSocket = new WebSocket(`wss://stream.binance.us:9443/ws/btcusd@kline_1d`);
 
 binanceSocket.onmessage = function (event) {	
 	var message = JSON.parse(event.data);
