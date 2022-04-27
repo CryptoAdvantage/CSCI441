@@ -11,6 +11,17 @@
     $token2 = (array_key_exists("token2", $_POST)) ? $_POST["token2"] : "";
     $interval = (array_key_exists("interval", $_POST)) ? $_POST["interval"] : "";
     $strategy = (array_key_exists("strategy", $_POST)) ? $_POST["strategy"] : "";
+    // Function to print out objects / arrays
+    function PrintObj ($o) { echo "<pre>"; print_r($o); echo "</pre>"; }
+
+    // Load the POST.
+    $klines = file_get_contents("php://input");
+
+    // ...and decode it into a PHP array.
+    $klines = json_decode($klines); 
+
+    // Do whatever with the array. 
+    PrintObj($klines);
    ?>
    
    <body>

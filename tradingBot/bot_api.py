@@ -4,6 +4,11 @@
 #import urllib.parse
 import sys
 import os
+import json
+try:
+    import requests
+except:
+    print("Error importing requests.")
 try:
     import TradingBot as tb
 except:
@@ -23,10 +28,11 @@ try:
     strategy = sys.argv[6]
     amount = 100
     tradeFee = 0.99925  # fee per trade multiplier
+    tradePair = token1+token2
 except:
     print("Error storing variables. <br>")
 
-try:
+""" try:
     print("<h3>Inside of Python</h3>")
     print("Bot Name: ", botName, "<br>")
     print("Exchange: ", exchange, "<br>")
@@ -36,28 +42,23 @@ try:
     print("Interval: ", interval, "<br>")
     print("Trading Strategy: ", strategy, "<br>")
 except:
-    print("Error printing variables. <br>")
+    print("Error printing variables. <br>") """
 
 try:
     baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
 except:
     print("Error initializing api keys. <br>")
-
 try:
-    testBot = tb.TradingBot(amount, token1, token2, tradeFee, interval)
-    testBot.test()
+    url = './tradingBot.php'
+    klines = baf.getKlines(tradePair, internal=interval, limit=1000)
+    x = requests.post(url, json = json.dumps(klines))
+    print(x.text)
 except:
-    print("Error with Trading Bot. <br>")
+    print("Error posting json object")
 
-""" print(botName)
-print(exchange)
-print(token1)
-print(token2)
-print(interval)
-print(strategy) """
-# startDate = ""
-# endDate = ""
-
-#test = tb.TradingBot(token1, token2, 0.99925, '1h')
-
-#print(test.test())
+""" try:
+    url = 'https://csci441project.herokuapp.com/history.php'
+    klines = baf.getKlines(tradePair, internal=interval, limit=1000)
+    requests.post(url, json = json.dumps(klines))
+except:
+    print("Error posting json object") """
