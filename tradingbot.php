@@ -22,6 +22,7 @@
 
     // Do whatever with the array. 
     PrintObj($klines);
+    exec("python ./tradingBot/bot_api.py $token1 $token2 $interval")
    ?>
    
    <body>
@@ -39,20 +40,7 @@
                 <input type="text" id="rsi_oversold" name="rsi_oversold" placeholder="30">
             </div>
             <div>
-                <?php 
-                    echo "<h3>Inside of PHP</h3>";
-                    echo "<br>";
-                    echo "Bot within PHP= " . $botName;
-                    echo "<br>";
-                    echo "Exchange within PHP= " . $exchange;
-                    echo "<br><br>";
-                    
-                    exec("python ./tradingBot/bot_api.py $botName $exchange $token1 $token2 $interval $strategy", $output);
-                    
-                    foreach($output as $blah){
-                        echo $blah;
-                    }
-                ?>
+                
             </div>
        </main>
        <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
