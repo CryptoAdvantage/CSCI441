@@ -46,10 +46,11 @@ except:
 
 try:
     baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
+    klines = baf.getKlines(tradePair, internal=interval, limit=1000)
 except:
     print("Error initializing api keys. <br>")
 try:
-    url = './tradingBot.php'
+    url = 'https://csci441project.herokuapp.com/tradingbot.php'
     klines = baf.getKlines(tradePair, internal=interval, limit=1000)
     x = requests.post(url, json = json.dumps(klines))
     print(x.text)
