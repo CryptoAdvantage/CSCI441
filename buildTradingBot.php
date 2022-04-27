@@ -57,9 +57,9 @@
                        <option value="6h">6 Hour</option>
                        <option value="8h">8 Hour</option>
                        <option value="12h">12 Hour</option>
-                       <option value="4d">1 Day</option>
-                       <option value="6d">3 Day</option>
-                       <option value="8w">1 Week</option>
+                       <option value="1d">1 Day</option>
+                       <option value="3d">3 Day</option>
+                       <option value="1w">1 Week</option>
                        <option value="1M">1 Month</option>
                    </select>
                </div>
