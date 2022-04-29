@@ -16,11 +16,11 @@ try:
 except:
     print("Error initializing keys.<br>")
 
-try:
+""" try:
     DATABASE_URL=os.environ.get('JAWSDB_URL')
     print(DATABASE_URL)
 except:
-    print("Error connecting to database. <br>")
+    print("Error connecting to database. <br>") """
 
 try:
     data = baf.getUsrAccountData()
