@@ -1,4 +1,5 @@
 import sys
+import os
 
 try:
     import binanceApiFunctions as baf
@@ -9,6 +10,11 @@ try:
     exchange = sys.argv[1]
 except:
     print("Error storing exchange variable. <br>")
+
+try:
+    baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
+except:
+    print("Error initializing keys.<br>")
 
 try:
     data = baf.getUsrAccountData()
