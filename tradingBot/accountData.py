@@ -4,7 +4,7 @@ import os
 try:
     import binanceApiFunctions as baf
 except:
-    print("Error imprting binance api functions! <br>")
+    print("Error importing binance api functions! <br>")
 
 try:
     exchange = sys.argv[1]
@@ -15,6 +15,12 @@ try:
     baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
 except:
     print("Error initializing keys.<br>")
+
+try:
+    DATABASE_URL=os.environ.get('JAWSDB_URL')
+    print(DATABASE_URL)
+except:
+    print("Error connecting to database. <br>")
 
 try:
     data = baf.getUsrAccountData()
