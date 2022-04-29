@@ -1,6 +1,7 @@
 import sys
 import os
 
+# testing
 try:
     import binanceApiFunctions as baf
 except:
