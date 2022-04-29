@@ -18,13 +18,13 @@ except:
 
 try:
     data = baf.getUsrAccountData()
-    print("Token     Available           Locked              Total<br>")
+    print("Token &emsp; Available &emsp; Locked &emsp; Total<br>")
     for d in data["balances"]:
         asset = d["asset"]
         free = d["free"]
         locked = d["locked"]
         total = (float(free)+float(locked))
         total = str(total)
-        print(asset.ljust(10)+free.ljust(20)+locked.ljust(20)+total.ljust(20)+"<br>")
+        print(f"{asset} &emsp; {free} &emsp; {locked} &emsp; {total}<br>")
 except:
     print("Error getting account data.")
