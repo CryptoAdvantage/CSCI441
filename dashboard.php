@@ -21,6 +21,7 @@
     $database = new Database();
     $db = $database->connect();
     $user = new User();
+    $exchange = "binanceus";
 
     if($user->isLogInAttempt()) {
         $attemptedUser = $user->logIn($db);
@@ -51,20 +52,24 @@
             //This is where we will put the how much of each cryptocurrency the user has. We should store this in a database so that way we can pull it and keep it updated.
             ?>
             <h3> Your Crypto: </h3>
-            <div class = "user-label">
+            <!-- <div class = "user-label">
                 <label> Bitcoin: </label>
                 <p> 1.32</p>
-            </div>
-            <div class = "user-label">
+            </div> -->
+            <!-- <div class = "user-label">
                 <label> Ethereum: </label>
                 <p> 0.45</p>
-            </div>
-            <div class = "user-label">
+            </div> -->
+            <!-- <div class = "user-label">
             <label> Rippple: </label>
             <p> 1.98</p>
-            </div>
-
-
+            </div> -->
+            <?php
+                exec("python ./tradingBot/accountData.py $exchange", $output);
+                foreach($output as $blah){
+                echo $blah;
+                }
+            ?>
         </div>
 
         <div class = "trade-history">
