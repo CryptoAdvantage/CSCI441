@@ -30,7 +30,8 @@ div.trading-bot1
     border-radius: 25px;
     margin-left: 0;
     background-color: white;
-    width: 600px;
+    justify-content: center;
+    width: 550px;
     max-width:600px; /* or whatever width you want. */
     float :left;
     height:600px;
@@ -41,7 +42,8 @@ div.trading-bot2
     border-radius: 25px;
     float: right;
     background-color: white;
-    width: 600px;
+    justify-content: center;
+    width: 550px;
     max-width:600px; /* or whatever width you want. */
     height:600px;
 }
