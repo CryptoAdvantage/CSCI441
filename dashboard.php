@@ -87,18 +87,18 @@
             </table>
         </div>
         <div class = "trading-bots">
-            <div class = "trading-bot1">
+            <div class = "trading-bot1 round-corners">
                 <p class="center"> View Your Trading Bots </p>
                 <img src="./images/viewBot.png" alt="View Bot" width="400px" height="auto">
                 <form action="./tradingbot.php">
-                    <button type="submit" class="view-bot-btn center">View Bot</button>
+                    <button type="submit" class="view-bot-btn center round-corners">View Bot</button>
                 </form>
             </div>
-            <div class = "trading-bot2">
+            <div class = "trading-bot2 round-corners">
                 <p class="center"> Build a New Trading Bot </p>
                 <img src="./images/buildBot.png" alt="Build Bot" width="400px" height="auto">
                 <form action="./buildTradingBot.php">
-                    <button type="submit" class="build-bot-btn center">Build Bot</button>
+                    <button type="submit" class="build-bot-btn center round-corners">Build Bot</button>
                 </form>
             </div>
         </div>

@@ -26,8 +26,6 @@ div.trading-bots {
 
 div.trading-bot1
 {
-    border: 2px solid $colorPrimary;
-    border-radius: 25px;
     margin-left: 0;
     background-color: white;
     justify-content: center;
@@ -38,8 +36,6 @@ div.trading-bot1
 }
 div.trading-bot2
 {
-    border: 2px solid $colorPrimary;
-    border-radius: 25px;
     float: right;
     background-color: white;
     justify-content: center;
@@ -50,4 +46,9 @@ div.trading-bot2
 .center{
     margin: auto;
     padding: 20px;
+    text-align: center;
+}
+.round-corners{
+    border: 2px solid $colorPrimary;
+    border-radius: 25px;
 }
