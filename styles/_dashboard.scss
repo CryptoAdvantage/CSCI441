@@ -19,6 +19,8 @@ div.user-label{
     width:250px;
 }
 div.trading-bots {
+    border-style: solid;
+    border-color: blue;
     width:1200px; /* or whatever width you want. */
     max-width:1200px;
 
@@ -42,9 +44,4 @@ div.trading-bot2
     background-color: white;
     max-width:600px; /* or whatever width you want. */
     height:auto;
-}
-div.bot-img
-{
-    width: 400px;
-    height: 400px;
 }
