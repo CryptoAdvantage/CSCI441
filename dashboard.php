@@ -89,14 +89,14 @@
         <div class = "trading-bots">
             <div class = "trading-bot1">
                 <p> View Your Trading Bots </p>
-                <img src="./images/viewBot.png" alt="View Bot">
+                <img class="bot-img" src="./images/viewBot.png" alt="View Bot">
                 <form action="./TradingBot.php">
                     <button type="submit" class="view-bot-btn">View Bot</button>
                 </form>
             </div>
             <div class = "trading-bot2">
                 <p> Build a New Trading Bot </p>
-                <img src="./images/buildBot.png" alt="Build Bot">
+                <img class="bot-img" src="./images/buildBot.png" alt="Build Bot">
                 <form action="./buildTradingBot.php">
                     <button type="submit" class="build-bot-btn">Build Bot</button>
                 </form>
