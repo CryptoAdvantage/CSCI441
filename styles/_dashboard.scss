@@ -19,8 +19,6 @@ div.user-label{
     width:250px;
 }
 div.trading-bots {
-    border-style: solid;
-    border-color: blue;
     width:1200px; /* or whatever width you want. */
     max-width:1200px;
 
@@ -28,20 +26,20 @@ div.trading-bots {
 
 div.trading-bot1
 {
-    border-style: dashed;
-    border-color: black;
+    border-style: solid;
+    border-color: $colorPrimary;
     margin-left: 0;
     background-color: white;
     max-width:600px; /* or whatever width you want. */
     float :left;
-    height:auto;
+    height:600px;
 }
 div.trading-bot2
 {
-    border-style: dashed;
-    border-color: black;
+    border-style: solid;
+    border-color: $colorPrimary;
     float: right;
     background-color: white;
     max-width:600px; /* or whatever width you want. */
-    height:auto;
+    height:600px;
 }
