@@ -64,6 +64,12 @@
             <label> Rippple: </label>
             <p> 1.98</p>
             </div> -->
+
+            <!-- 
+                I only put this in temporarily just to get a return for the user account from the exchange, 
+                This will be where we return the account holdings from the database, and we can use this file
+                to update the current account holdings in the database when clicked to update.
+            -->
             <?php
                 exec("python ./tradingBot/accountData.py $exchange", $output);
                 foreach($output as $blah){
@@ -90,13 +96,6 @@
             </div>
             <div class = "trading-bot2">
                 <p> place holder for trading bot 2 </p>
-                <img src="./images/build-Bot.png" alt="Build Bot" width="200" height="300">
-                <form action="./buildTradingBot.php">
-                    <button type="submit" class="build-bot-btn">Build Bot</button>
-                </form>
-            </div>
-            <div class = "trading-bot3">
-                <p> Place holder for trading bot 3</p>
                 <img src="./images/build-Bot.png" alt="Build Bot" width="200" height="300">
                 <form action="./buildTradingBot.php">
                     <button type="submit" class="build-bot-btn">Build Bot</button>
