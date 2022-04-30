@@ -83,9 +83,9 @@
         <div class = "trading-bots">
             <div class = "trading-bot1">
                 <p> place holder for trading bot 1 </p>
-                <img src="./images/build-Bot.png" alt="Build Bot" width="200" height="300">
+                <img src="./images/viewBot.jpg" alt="Build Bot" width="200" height="300">
                 <form action="./buildTradingBot.php">
-                    <button type="submit" class="build-bot-btn">Build Bot</button>
+                    <button type="submit" class="view-bot-btn">View Bot</button>
                 </form>
             </div>
             <div class = "trading-bot2">
