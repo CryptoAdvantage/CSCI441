@@ -96,7 +96,7 @@
             </div>
             <div class = "trading-bot2 round-corners center">
                 <p class="center"> Build a New Trading Bot </p>
-                <img src="./images/buildBot.png" alt="Build Bot" width="400px" height="auto">
+                <img class="img-build" src="./images/buildBot.png" alt="Build Bot" width="400px" height="auto">
                 <form action="./buildTradingBot.php">
                     <button type="submit" class="button center">Build Bot</button>
                 </form>
