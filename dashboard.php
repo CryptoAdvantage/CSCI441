@@ -47,7 +47,7 @@
     <main>
         <h1>CryptoAdvantage Dashboard</h1>
 
-        <div class = "user"> 
+        <div class = "user center round-corners"> 
             <?php
             //This is where we will put the how much of each cryptocurrency the user has. We should store this in a database so that way we can pull it and keep it updated.
             ?>
