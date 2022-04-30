@@ -30,18 +30,18 @@ div.trading-bot1
     border-color: black;
     margin-left: 0;
     background-color: white;
-    width:600px; /* or whatever width you want. */
+    width:50%; /* or whatever width you want. */
     max-width:600px; /* or whatever width you want. */
-   float :left;
-   height:600px;
+    float :left;
+    height:600px;
 }
 div.trading-bot2
 {
     border-style: dashed;
     border-color: black;
-    float: right;
+    float: left;
     background-color: white;
-    width:600px; /* or whatever width you want. */
+    width:50%; /* or whatever width you want. */
     max-width:600px; /* or whatever width you want. */
     height:600px;
 
