@@ -83,21 +83,21 @@
         <div class = "trading-bots">
             <div class = "trading-bot1">
                 <p> place holder for trading bot 1 </p>
-                <img src="./images/build-Bot.png" alt="Build Bot">
+                <img src="./images/build-Bot.png" alt="Build Bot" width="200" height="300">
                 <form action="./buildTradingBot.php">
                     <button type="submit" class="build-bot-btn">Build Bot</button>
                 </form>
             </div>
             <div class = "trading-bot2">
                 <p> place holder for trading bot 2 </p>
-                <img src="./images/build-Bot.png" alt="Build Bot">
+                <img src="./images/build-Bot.png" alt="Build Bot" width="200" height="300">
                 <form action="./buildTradingBot.php">
                     <button type="submit" class="build-bot-btn">Build Bot</button>
                 </form>
             </div>
             <div class = "trading-bot3">
                 <p> Place holder for trading bot 3</p>
-                <img src="./images/build-Bot.png" alt="Build Bot">
+                <img src="./images/build-Bot.png" alt="Build Bot" width="200" height="300">
                 <form action="./buildTradingBot.php">
                     <button type="submit" class="build-bot-btn">Build Bot</button>
                 </form>
