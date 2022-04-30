@@ -90,7 +90,7 @@
             <div class = "trading-bot1">
                 <p> View Your Trading Bots </p>
                 <img class="bot-img" src="./images/viewBot.png" alt="View Bot">
-                <form action="./TradingBot.php">
+                <form action="./tradingbot.php">
                     <button type="submit" class="view-bot-btn">View Bot</button>
                 </form>
             </div>
