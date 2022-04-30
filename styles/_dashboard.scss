@@ -3,11 +3,8 @@ img.dashboard{
 }
 
 div.user {
-    border: 1px;
-    border-style:solid;
-    border-color: black;
-    border-width: 1px;
     text-align: left;
+    width: 800px;
     align-self:stretch;
     background-color: white;
 }
@@ -28,7 +25,6 @@ div.trading-bot1
 {
     margin-left: 0;
     background-color: white;
-    justify-content: center;
     width: 550px;
     max-width:600px; /* or whatever width you want. */
     float :left;
@@ -38,7 +34,6 @@ div.trading-bot2
 {
     float: right;
     background-color: white;
-    justify-content: center;
     width: 550px;
     max-width:600px; /* or whatever width you want. */
     height:600px;
@@ -49,7 +44,7 @@ div.trading-bot2
     text-align: center;
 }
 .round-corners{
-    border: 2px solid grey;
+    border: 2px solid black;
     border-radius: 25px;
     box-shadow: 2px 2px grey;
 }

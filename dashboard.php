@@ -87,14 +87,14 @@
             </table>
         </div>
         <div class = "trading-bots">
-            <div class = "trading-bot1 round-corners">
+            <div class = "trading-bot1 round-corners center">
                 <p class="center"> View Your Trading Bots </p>
                 <img src="./images/viewBot.png" alt="View Bot" width="400px" height="auto">
                 <form action="./tradingbot.php">
                     <button type="submit" class="view-bot-btn center round-corners">View Bot</button>
                 </form>
             </div>
-            <div class = "trading-bot2 round-corners">
+            <div class = "trading-bot2 round-corners center">
                 <p class="center"> Build a New Trading Bot </p>
                 <img src="./images/buildBot.png" alt="Build Bot" width="400px" height="auto">
                 <form action="./buildTradingBot.php">
