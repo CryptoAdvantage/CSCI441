@@ -1,36 +1,65 @@
 <?php
+
+include_once __DIR__ . "/BaseModel.php";
 class User extends BaseModel{
+    public $id;
+    public $email;
+    public $phone;
+    public $permission;
+    public $password;
+    
     public function __construct(){
         parent::__construct();
     }
 
-    public function exists($db){
-        return $this->hasData($db, "Select * from user where email=?", array($this->POST("email")));
+    public function exists($email){
+        return $this->hasData("Select * from user where email=?", array($email));
     }
 
     public function isLogInAttempt(){
         return $this->hasParams(array("email", "password"));
     }
 
-    public function logIn($db){
-        if(!$this->exists($db)) return array("loggedin"=>false);
+    public function logIn(){     
+        if($this->hasParams(array("email", "password"))){
+            $pw = $this->POST("password");
+            $email = $this->POST("email");
 
-        $getPassCmd = "Select * from user where email=?";
-        $arr = array($this->POST("email"));
-        $userData = $this->execute($db, $getPassCmd, $arr)->fetchAll()[0];
-        if(!password_verify($this->POST("password"), $userData['Password'])) return array("loggedin"=>false);
+            $_SESSION["password"] = $pw;
+            $_SESSION["email"] = $email;
+        } else {
+            $pw = $this->SESS("password");
+            $email = $this->SESS("email");
+        }
 
-        return array("loggedin"=>true, "Email"=>$userData['Email'], "ID"=>$userData['ID'], "Phone"=>$userData['Phone'], "Permission"=>$userData['Permission']);
+        if($pw == null || $email == null) return false;
+        if(!$this->exists($email)) return false;
+
+        $userData = $this->execute("Select * from user where email=?", array($email))->fetchAll()[0];
+        if(!password_verify($pw, $userData['Password'])) {
+            session_destroy();
+            return false;
+        }
+
+        $this->id = $userData['ID'];
+        $this->email = $userData['Email'];
+        $this->phone = $userData['Phone'];
+        $this->permission = $userData['Permission'];
+        $this->password = $userData["Password"];
+
+        $_SESSION["loggedin"] = true;
+
+        return true;
     }
 
-    public function register($db){
-        if($this->exists($db)) return false;
+    public function register(){
         if(!$this->hasParams(array("email", "phone", "password"))) return false;
-
+        if($this->exists($this->POST("email"))) return false;
+        
         $cmd = "Insert into user (`email`, `phone`, `SecurityKey`, `password`) values (?,?,'AutoValue',?)";
         $arr = array($this->POST("email"), $this->convertPhone(), password_hash($this->POST("password"), PASSWORD_DEFAULT));
 
-        $this->execute($db, $cmd, $arr);
+        $this->execute($cmd, $arr);
 
         return true;
     }
@@ -41,7 +70,21 @@ class User extends BaseModel{
     }
 
     public function resetPassword(){
-        // TODO: Implement password reset
+        if(!$this->hasParams(array("newPassword", "currentPassword"))) return false;        
+        if(!password_verify($this->POST("password"), $this->password)) return false;
+
+        $cmd = "Update user set 'password'=? where 'email'=?";
+        $arr = array(password_hash($this->POST("password"), PASSWORD_DEFAULT), $this->email);
+        
+        $this->execute($cmd, $arr);
+
         return true;
+    }
+
+    public function getTradeHistory()
+    {        
+        $cmd = "SELECT c1.Ticker, c2.Ticker, e.Name, p.Date, p.Open, t.Action, t.Quantity FROM tradehistory t INNER JOIN tradepair c ON t.PairID = c.ID INNER JOIN cryptocurrency c1 ON c.FirstPairID = c1.ID INNER JOIN cryptocurrency c2 ON c.SecondPairID = c2.ID INNER JOIN exchange e ON t.ExchID = e.ID INNER JOIN pricehistory p ON t.PriceID = p.ID WHERE t.UserID=? ORDER BY p.Date DESC;";
+        $arr = array($this->id);
+        return $this->execute($cmd, $arr)->fetchAll();
     }
 }

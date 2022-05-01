@@ -1,6 +1,13 @@
 <html>
 <?php
-    //session_start();
+    include_once "./models/User.php";
+    $user = new User();
+    if(!$user->logIn()){
+        session_destroy();
+        header("Location: ./login.php?error");
+        exit;
+    }
+    
     $pageTitle = "CryptoAdvantage | Bot Creator";
     include_once "./templates/header.php";
     include_once "./templates/navbar.php";

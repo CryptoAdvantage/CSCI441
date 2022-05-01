@@ -1,18 +1,19 @@
 <html>
 <?php
-    session_start();
+    include_once "./models/User.php";
+    $user = new User();
+    if($user->logIn()){
+        if(isset($_GET["logout"])){
+            session_destroy();
+        } else {
+            header("Location: ./dashboard.php");
+            exit;
+        }
+    } 
+
    $pageTitle = "CryptoAdvantage | Login";
    include_once "./templates/header.php";
    include_once "./templates/navbar.php";
-
-   if(isset($_GET["logout"])){
-    $_SESSION["loggedin"] = false;
-   }
-
-   if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]){
-    header("Location: ./dashboard.php");
-    exit;
-}
 ?>
 
 <body>

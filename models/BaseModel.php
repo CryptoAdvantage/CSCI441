@@ -1,7 +1,13 @@
 <?php
+include_once dirname(__DIR__, 1) . "/config/Database.php";
+if(session_id() == "") session_start();
+
 class BaseModel{
+    private $db;
 
     public function __construct(){
+        $x = new Database();
+        $this->db = $x->connect();
     }
 
     public function GET($label){
@@ -12,6 +18,10 @@ class BaseModel{
         return isset($_POST[$label]) ? htmlspecialchars(strip_tags($_POST[$label])) : null;
     }
 
+    public function SESS($label){
+        return isset($_SESSION[$label]) ? htmlspecialchars(strip_tags($_SESSION[$label])) : null;
+    }
+
     public function hasParams($params){
         for($i = 0; $i < count($params); $i++){
             if($this->GET($params[$i])== null && $this->POST($params[$i])== null) return false;
@@ -20,8 +30,8 @@ class BaseModel{
         return true;
     }
 
-    public function execute($db, $query, $params = array()){
-        $stmt = $db->prepare($query);
+    public function execute($query, $params = array()){
+        $stmt = $this->db->prepare($query);
         for($i = 1; $i <= count($params); $i++){
             $stmt->bindParam($i, $params[$i-1]);
         }
@@ -29,11 +39,11 @@ class BaseModel{
         return $stmt;
     }
 
-    public function hasData($db, $query, $params = array()){
-        return $this->execute($db, $query, $params)->rowCount() > 0;
+    public function hasData($query, $params = array()){
+        return $this->execute($query, $params)->rowCount() > 0;
     }
 
-    public function getInsertId($db){
-        return $db->lastInsertId();
+    public function getInsertId(){
+        return $this->db->lastInsertId();
     }
 }

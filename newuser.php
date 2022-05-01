@@ -8,13 +8,6 @@
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
     }
 
-    include_once "./models/BaseModel.php";
-    include_once "./config/Database.php";
-    include_once "./models/User.php";
-
-    $database = new Database();
-    $db = $database->connect();
-
     $pageTitle = "CryptoAdvantage | New User";
     include_once "./templates/header.php";
     include_once "./templates/navbar.php";
@@ -25,8 +18,9 @@
         <h2>Account Registration</h2>
 
         <?php
+            include_once "./models/User.php";
             $user = new User();
-            if($user->register($db)){
+            if($user->register()){
         ?>
             <p class="return-msg">Your new user account was created successfully!</p>
         <?php } else { ?>

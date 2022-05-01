@@ -1,7 +1,14 @@
 <html>
-<link id="primary-css" rel="stylesheet" href="./styles/_dashboard.scss">
-<?php
-    session_start();
+
+<?php    
+    include_once "./models/User.php";
+    $user = new User();
+    if(!$user->logIn()){
+        session_destroy();
+        header("Location: ./login.php?error");
+        exit;
+    }
+
     header('Access-Control-Allow-Origin: *');
 
     $method = $_SERVER['REQUEST_METHOD'];
@@ -9,38 +16,14 @@
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
     }
 
-    include_once "./models/BaseModel.php";
-    include_once "./config/Database.php";
-    include_once "./models/User.php";
-    include_once "./models/validatedUser.php";
-
     $pageTitle = "CryptoAdvantage | Dashboard";
     include_once "./templates/header.php";
     include_once "./templates/navbar_stduser.php";
 
-    $database = new Database();
-    $db = $database->connect();
-    $user = new User();
     $exchange = "binanceus";
 
-    if($user->isLogInAttempt()) {
-        $attemptedUser = $user->logIn($db);
-        $_SESSION["loggedin"] = $attemptedUser['loggedin'];
-        if(!$_SESSION["loggedin"]){
-            header("Location: ./login.php?error");
-            exit;
-        }
-        $_SESSION['validatedUser'] = new validatedUser($attemptedUser['Email'], $attemptedUser['ID'], $attemptedUser['Phone'], $attemptedUser['Permission']);
-    }
-
-    if(!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]){
-        header("Location: ./login.php?error");
-        exit;
-    }
-
-    $tradeHistory = $_SESSION['validatedUser']->getTradeHistory($db);
-
-    // can use this statment to see trade history: print_r($tradeHistory);
+    // $_SESSION cannot hold objects and will stringify the object so this fails round two.  
+    //$tradeHistory = $_SESSION['validatedUser']->getTradeHistory($db);
 ?>
 
 <body>
@@ -81,7 +64,7 @@
         <div class = "trade-history">
             <table>
             <?php 
-            print_r($tradeHistory);
+            print_r($user->getTradeHistory());
             //This should print the trade history for the user. 
             ?>
             </table>
