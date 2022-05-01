@@ -12,30 +12,20 @@
             ///////////////////////////////////////////////////   
             ////    CODE for when the database is hosted   ////
             /////////////////////////////////////////////////// 
-            //$url = getenv('JAWSDB_URL');
-            //$dbparts = parse_url($url);
-            // $this->hostname = $dbparts['host'];
-            // $this->username = $dbparts['user'];
-            // $this->password = $dbparts['pass'];
-            // $this->database = ltrim($dbparts['path'],'/');   
+            $url = getenv('JAWSDB_URL');
+            $dbparts = parse_url($url);
+            $this->hostname = $dbparts['host'];
+            $this->username = $dbparts['user'];
+            $this->password = $dbparts['pass'];
+            $this->database = ltrim($dbparts['path'],'/');   
             
-            //////////////////////////////////////////////
-            ////    Local Dev Code -- Delete Later    ////
-            //////////////////////////////////////////////
-            //$this->hostname = "localhost";
-            // $this->username = "root";
-            // $this->password = "";
-            // $this->database = "cryptoadvantage";
-
             //////////////////////////////////////////////
             ////    Local Dev with Hosted Database    ////
             //////////////////////////////////////////////
-            // Note:  this also works for the deployed app because
-            //          the env variables are set within app config
-            $this->hostname = getenv("HOST");            
-            $this->username = getenv("USER");
-            $this->password = getenv("PASS");            
-            $this->database = getenv("DATABASE");
+            // $this->hostname = getenv("HOST");            
+            // $this->username = getenv("USER");
+            // $this->password = getenv("PASS");            
+            // $this->database = getenv("DATABASE");
         }
 
         public function connect(){          
