@@ -460,7 +460,82 @@ footer .social-row li a {
 }
 
 img.dashboard {
-  width: 90vw;
+  width: 10vw;
+}
+
+div.user {
+  text-align: left;
+  width: 800px;
+  -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-self: stretch;
+  background-color: white;
+}
+
+div.user-label {
+  text-align: left;
+  float: left;
+  padding: 10px;
+  width: 250px;
+}
+
+div.trading-bots {
+  width: 1200px;
+  /* or whatever width you want. */
+  max-width: 1200px;
+}
+
+div.trading-bot1 {
+  margin-left: 0;
+  background-color: white;
+  width: 550px;
+  max-width: 600px;
+  /* or whatever width you want. */
+  float: left;
+  height: 600px;
+}
+
+div.trading-bot2 {
+  float: right;
+  background-color: white;
+  width: 550px;
+  max-width: 600px;
+  /* or whatever width you want. */
+  height: 600px;
+}
+
+.center {
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.round-corners {
+  border: 2px solid black;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px grey;
+          box-shadow: 2px 2px grey;
+}
+
+.button {
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+  background-color: #c8642d;
+  color: white;
+}
+
+.button:hover {
+  border-radius: 8px;
+  background-color: #ecc2ac;
+  color: #c8642d;
+  -webkit-box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.img-build {
+  margin-top: 40px;
+  margin-bottom: 50px;
 }
 
 * {
@@ -543,4 +618,38 @@ main p {
   padding: 1rem;
   font-size: calc(0.2vw + 17px);
   width: 100%;
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.7, 0.7);
+            transform: scale(0.7, 0.7);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.7, 0.7);
+            transform: scale(0.7, 0.7);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-transition {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+}
+
+.faded {
+  -webkit-animation: fade-in 0.3s;
+          animation: fade-in 0.3s;
+  opacity: 1;
 }
