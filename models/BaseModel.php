@@ -18,7 +18,7 @@ class BaseModel{
         return isset($_POST[$label]) ? htmlspecialchars(strip_tags($_POST[$label])) : null;
     }
 
-    public function SESS($label){
+    public function SESSION($label){
         return isset($_SESSION[$label]) ? htmlspecialchars(strip_tags($_SESSION[$label])) : null;
     }
 

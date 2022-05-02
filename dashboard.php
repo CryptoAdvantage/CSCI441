@@ -3,11 +3,7 @@
 <?php    
     include_once "./models/User.php";
     $user = new User();
-    if(!$user->logIn()){
-        session_destroy();
-        header("Location: ./login.php?error");
-        exit;
-    }
+    $user->validate();
 
     header('Access-Control-Allow-Origin: *');
 

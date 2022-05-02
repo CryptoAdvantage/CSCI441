@@ -2,17 +2,12 @@
 <?php
     include_once "./models/User.php";
     $user = new User();
-    if(!$user->logIn()){
-        session_destroy();
-        header("Location: ./login.php?error");
-        exit;
-    }
+    $user->validate();
 
-    header('Access-Control-Allow-Origin: *');
-
-    $method = $_SERVER['REQUEST_METHOD'];
-    if ($method === 'OPTIONS') {
-        header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
+    if(isset($_GET["update"])){
+        $user->resetPassword();
+    } elseif(isset($_GET["update"])){
+        $user->deleteAccount();
     }
 
    $pageTitle = "CryptoAdvantage | Settings";
@@ -22,17 +17,27 @@
 
 <body>
     <main>
-    <h2>Account Settings</h2>
-        <form method="POST" class="entry-form" action="./usersettings.php">
+        <h2>Update Password</h2>
+        <form method="POST" class="entry-form" action="./usersettings.php?update">
+        <div class="input-item">
+                <label for="newPassword">New Password <small>(8 char minimum)</small>:</label>
+                <input type="password" id="newPassword" name="newPassword" minlength="8" required>                
+            </div>
             <div class="input-item">
-                <label for="password">New Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword" name="currentPassword" required>                
             </div>
             <div class="input-item">
                 <input class="btn" type="submit" value="Reset Password">
             </div>
         </form>
-        <form method="POST" class="entry-form" action="./usersettings.php">
+        <br>
+        <h2>Delete Account</h2>
+        <form method="POST" class="entry-form" action="./usersettings.php?delete">
+            <div class="input-item">
+                <label for="password">Password <small>(8 char minimum)</small>:</label>
+                <input type="password" id="password" name="password" minlength="8" required>                
+            </div>
             <div class="input-item">
                 <input class="btn" type="submit" value="Delete Account">
             </div>
