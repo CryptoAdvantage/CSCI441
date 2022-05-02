@@ -18,6 +18,7 @@
             <li><a href="./about.php">About</a></li>                    
             <li><a href="./faq.php">FAQ</a></li>
             <li><a href="./login.php">Log In</a></li>
+            <li><a href="mailto:support@cryptoadvantage.app">Contact</a></li>
         </ul>
     </nav>
 </div>
