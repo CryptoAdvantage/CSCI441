@@ -62,6 +62,35 @@ INSERT INTO `cryptocurrency` (`ID`, `Name`, `Ticker`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trading_bot`
+--
+
+CREATE TABLE `trading_bot` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `user_id` int(11) NOT NULL,
+   `exch_id` int(11) NOT NULL,
+   `name` varchar(20) NOT NULL,
+   `interval` varchar(3) NOT NULL,
+   `strategy` varchar(20) NOT NULL,
+   `token1` int(11) NOT NULL,
+   `token2` int(11) NOT NULL,
+   PRIMARY KEY (`id`),
+   KEY `exch_id` (`exch_id`), KEY `user_id` (`user_id`),
+   KEY `token1` (`token1`), KEY `token2` (`token2`),
+   CONSTRAINT `tb_ibfk_1` FOREIGN KEY (`exch_id`)
+       REFERENCES `exchange` (`id`) ON DELETE CASCADE,
+   CONSTRAINT `tb_ibfk_2` FOREIGN KEY (`user_id`)
+       REFERENCES `user` (`id`) ON DELETE CASCADE,
+   CONSTRAINT `tb_ibfk_3` FOREIGN KEY (`token1`)
+       REFERENCES `cryptocurrency` (`id`) ON DELETE CASCADE,
+   CONSTRAINT `tb_ibfk_4` FOREIGN KEY (`token2`)
+       REFERENCES `cryptocurrency` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `exchange`
 --
 
@@ -110,12 +139,37 @@ INSERT INTO `exchange` (`ID`, `Name`, `APIUrl`) VALUES
 -- Table structure for table `exchangeconnection`
 --
 
-CREATE TABLE `exchangeconnection` (
-  `ID` int(11) NOT NULL,
-  `ExchangeID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `ApiKey` varchar(70) NOT NULL,
-  `SecurityKey` varchar(70) NOT NULL,
+CREATE TABLE `exch_conn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exch_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `api_key` varchar(255) NOT NULL,
+  `sec_key` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `exch_id` (`exch_id`), KEY `user_id` (`user_id`),
+  CONSTRAINT `exch_conn_ibfk_1` FOREIGN KEY (`exch_id`)
+      REFERENCES `exchange` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `exch_conn_ibfk_2` FOREIGN KEY (`user_id`)
+      REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `useraccount`
+--
+
+CREATE TABLE `user_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `exch_id` int(11) NOT NULL,
+  `docs` JSON,
+  PRIMARY KEY (`id`)
+  KEY `exch_id` (`exch_id`), KEY `user_id` (`user_id`),
+  CONSTRAINT `user_acc_ibfk_1` FOREIGN KEY (`exch_id`)
+      REFERENCES `exchange` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_acc_ibfk_2` FOREIGN KEY (`user_id`)
+      REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
