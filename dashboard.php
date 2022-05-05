@@ -18,9 +18,6 @@
     include_once "./templates/navbar_stduser.php";
 
     $exchange = "binanceus";
-
-    // $_SESSION cannot hold objects and will stringify the object so this fails round two.  
-    //$tradeHistory = $_SESSION['validatedUser']->getTradeHistory($db);
 ?>
 
 <body>
@@ -28,35 +25,32 @@
         <h1>CryptoAdvantage Dashboard</h1>
 
         <div class = "user center round-corners"> 
-            <h3> Your Crypto: </h3>
+            <h2> Your Crypto: </h2>
             <?php
-                echo "<table>";
+                echo "<table id='table_dashboard'";
                     echo "<tr>";
-                        echo "<th>Cryptocurrency</th>";
-                        echo "<th>Available</th>";
+                        echo "<th>Crypto</th>";
+                        echo "<th>Avail</th>";
                         echo "<th>Locked</th>";
                         echo "<th>Total</th>";
                     echo "</tr>";
                     $result = $user->getAccount();
-                    $arr = json_decode($result, true);
+                    $arr = json_decode($result[0]['docs'], true);
+
                     foreach($arr as $k => $val) {
-                        $avail = $val['free'];
-                        $lock = $val['locked'];
-                        $total = $val['total'];
+                        $avail = round($val['free'],1);
+                        $lock = round($val['locked'],1);
+                        $total = round($val['total'],1);
                         echo "<tr>";
-                            echo `<td>${k}:</td>`;
-                            echo `<td>${avail}:</td>`;
-                            echo `<td>${lock}:</td>`;
-                            echo `<td>${total}:</td>`;
-                        echo "</tr>";
+                              echo "<td>{$k}</td>";
+                              echo "<td>{$avail}</td>";
+                              echo "<td>{$lock}</td>";
+                              echo "<td>{$total}</td>";
+                         echo "</tr>";
                     }
                 echo "</table>";
             ?>
-
-            <!-- <div class = "user-label">
-                <label> Bitcoin: </label>
-                <p> 1.32</p>
-            </div> -->
+            
         </div>
         <div class = "trading-bots">
             <div class = "trading-bot1 round-corners center">

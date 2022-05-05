@@ -1,11 +1,39 @@
+#table_dashboard{
+   margin: auto;
+   border-collapse: collapse;
+   tr{
+       //width: 100%;
+       padding: 3px 5px;
+
+       border: 1px solid $colorBackground;
+
+       th, td{
+           width: 20vw;
+           max-width: 150px;
+           text-align: center;
+           padding: 2px 3px;
+           font-size: $fontXSmall;
+       }
+
+       th{
+           border: 1px solid black;
+           font-size: $fontSmall;
+       }
+   }
+
+   
+   
+}
+
+
 img.dashboard{
     width: 10vw;
 }
 
 div.user {
     text-align: left;
-    width: 800px;
-    align-self:stretch;
+    width: 100%;
+    //align-self:stretch;
     background-color: white;
 }
 
