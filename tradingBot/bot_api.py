@@ -1,10 +1,8 @@
 import sys
 import os
-import json
-try:
-    import requests
-except:
-    print("Error importing requests.")
+from datetime import datetime as dt
+import time
+
 try:
     import TradingBot as tb
 except:
@@ -13,10 +11,10 @@ try:
     import binanceApiFunctions as baf
 except:
     print("Error imprting binance api functions! <br>")
-try:
+""" try:
     import myModels
 except:
-    print("Error importing models <br>")
+    print("Error importing models <br>") """
 
 try:
     botName = sys.argv[1]
@@ -35,12 +33,47 @@ try:
 except:
     print("Error storing variables. <br>")
 
+def bb_simple(bot):
+    """loop framework"""
+    start = True
+    current_token = bot.token2
+    while True:
+        if (dt.now().second % 10 == 0) or start:
+            if (dt.now().minute % 2 == 0 and dt.now().second == 10) or start:
+                start = False
+                # refresh data
+                df = baf.getData(bot.trade_pair, bot.interval)
+                state = baf.getState(df)
+            
+            obPriceData = baf.getBestObPrice(bot.trade_pair)
+            if current_token == bot.token2:
+                askPrice = float(obPriceData['askPrice'])
+                print(f"AskPrice: {askPrice}")
+                lowerBand = df['lowerBand'].iloc[-1]
+                print(f"Lower Band: {lowerBand}")
+                if askPrice < lowerBand and state == 'between':
+                    bot.buy(askPrice, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
+                    current_token = bot.token1
+                    break
+
+            if current_token != bot.token2:
+                bidPrice = float(obPriceData['bidPrice'])
+                print(f"AskPrice: {askPrice}")
+                upperBand = df['upperBand'].iloc[-1]
+                print(f"Upper Band: {upperBand}")
+                if bidPrice > upperBand and state == 'between':
+                    bot.sell(bidPrice, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
+                    current_token = bot.token2
+                    
+        print(f"new loop - Time: {dt.now()}")
+        time.sleep(1)
 
 try:
     baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
     print(baf.testConnection())
     t_bot = tb.TradingBot(email, botName, strategy, exchange, amount, token1, token2, tradeFee, interval)
-    myModels.bb_simple(t_bot)
+    #bb_simple(t_bot)
+    print("Bot Active")
 except:
     print("Error running bot.<br>")
 
