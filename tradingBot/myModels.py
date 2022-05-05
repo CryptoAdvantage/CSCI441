@@ -1,4 +1,4 @@
-from datetime import datetime as dt
+""" from datetime import datetime as dt
 import time
 import binanceApiFunctions as baf
 import pandas as pd
@@ -10,17 +10,17 @@ import pickle
 
 
 def bollinger_bands(data, sma, window, nstd):
-    """Return upper and lower Bollinger Bands."""
+    "Return upper and lower Bollinger Bands."
     std = data.rolling(window=window).std()
     upper_band = sma + std * nstd
     lower_band = sma - std * nstd
     return upper_band, lower_band
 
 def sma(data, window):
-    """Return rolling mean of given values, using specified window size."""
+    "Return rolling mean of given values, using specified window size."
     return data.rolling(window = window).mean()
 
-""" def bb_simple(df, bot):
+def bb_simple(df, bot):
     for i in range(len(df)):
         if bot.curr_token == 'USD':
             if df['low'].iloc[i] < df['lowerBand'].iloc[i]: # buy signal
@@ -33,10 +33,10 @@ def sma(data, window):
             
     print(f'num buys: {len(bot.buys)}  buys: {bot.buys}')
     print(f'num sells: {len(bot.sells)}')
-    print(f'ending balance: {bot.amount} {bot.coin}') """
+    print(f'ending balance: {bot.amount} {bot.coin}') 
 
 def bb_simple(bot):
-    """loop framework"""
+    "loop framework"
     start = True
     current_token = bot.token2
     while True:
@@ -131,4 +131,4 @@ def ml_test(df, normed_cols):
     pcas = pd.DataFrame(pca.transform(x),columns=['pca1','pca2'])
     pcas['label'] = list(y)
     
-    #plt.scatter(pcas['pca1'], pcas['pca2'])
+    #plt.scatter(pcas['pca1'], pcas['pca2']) """
