@@ -9,16 +9,14 @@ try:
     import TradingBot as tb
 except:
     print("Error importing TradingBot class! <br>")
-
 try:
     import binanceApiFunctions as baf
 except:
     print("Error imprting binance api functions! <br>")
-
-""" try:
+try:
     import models
 except:
-    print("Error importing models") """
+    print("Error importing models <br>")
 
 try:
     botName = sys.argv[1]
@@ -37,30 +35,14 @@ try:
 except:
     print("Error storing variables. <br>")
 
-""" try:
-    user = 10
-    botName = "Testing1"
-    exchange = "binanceus"
-    token1 = "BTC"
-    token2 = "USD"
-    interval = "1h"
-    strategy = "BB"
-    amount = 1000
-    tradePair = token1+token2
-    tradeFee = 0.99925
-except:
-    print("Error storing variables. <br>") """
 
-""" try:
-    #baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
-    api = "CqQEHo0a1vY6BuoQKhL72B0nGzIjf2w8fKo0iTobJnpfLzaHfwgkZGVFzEb91kTG"
-    sec = "FtX1LVJYGkKnauLBoirxuA13XVvSDug27QuC6bxcNpLdcm0R9RnzeLbAStFwLswH"
-    baf.initialise(api, sec)
+try:
+    baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
     print(baf.testConnection())
-    t_bot = tb.TradingBot(user, botName, strategy, exchange, amount, token1, token2, tradeFee, interval)
+    t_bot = tb.TradingBot(email, botName, strategy, exchange, amount, token1, token2, tradeFee, interval)
     models.bb_simple(t_bot)
 except:
-    print("Error running bot.<br>") """
+    print("Error running bot.<br>")
 
 try:
     print("<br><br><h3>Trading Bot Settings:</h3>")
@@ -73,6 +55,6 @@ try:
     print("Interval: ", interval, "<br>")
     print("Trading Strategy: ", strategy, "<br>")
     if (posted == "true"):
-        print("Store to DB")
+        print("Stored to DB <br>")
 except:
-    print("Error printing variables. <br>")
+    print("Error storing settings. <br>")

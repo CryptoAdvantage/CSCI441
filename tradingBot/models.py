@@ -1,14 +1,5 @@
-
-
-"""
-    Just Ignore this for the time being. 
-    I am still working on a lot here, and 
-    then I will make it customizable for the
-    user after I clean it up and make sure it
-    works accordingly.
-"""
-
-
+from datetime import datetime as dt
+import time
 import binanceApiFunctions as baf
 import pandas as pd
 import talib as tal
@@ -29,7 +20,7 @@ def sma(data, window):
     """Return rolling mean of given values, using specified window size."""
     return data.rolling(window = window).mean()
 
-def bb_simple(df, bot):
+""" def bb_simple(df, bot):
     for i in range(len(df)):
         if bot.curr_token == 'USD':
             if df['low'].iloc[i] < df['lowerBand'].iloc[i]: # buy signal
@@ -42,7 +33,42 @@ def bb_simple(df, bot):
             
     print(f'num buys: {len(bot.buys)}  buys: {bot.buys}')
     print(f'num sells: {len(bot.sells)}')
-    print(f'ending balance: {bot.amount} {bot.coin}')
+    print(f'ending balance: {bot.amount} {bot.coin}') """
+
+def bb_simple(bot):
+    """loop framework"""
+    start = True
+    current_token = bot.token2
+    while True:
+        if (dt.now().second % 10 == 0) or start:
+            if (dt.now().minute % 2 == 0 and dt.now().second == 10) or start:
+                start = False
+                # refresh data
+                df = baf.getData(bot.trade_pair, bot.interval)
+                state = baf.getState(df)
+            
+            obPriceData = baf.getBestObPrice(bot.trade_pair)
+            if current_token == bot.token2:
+                askPrice = float(obPriceData['askPrice'])
+                print(f"AskPrice: {askPrice}")
+                lowerBand = df['lowerBand'].iloc[-1]
+                print(f"Lower Band: {lowerBand}")
+                if askPrice < lowerBand and state == 'between':
+                    bot.buy(askPrice, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
+                    current_token = bot.token1
+                    break
+
+            if current_token != bot.token2:
+                bidPrice = float(obPriceData['bidPrice'])
+                print(f"AskPrice: {askPrice}")
+                upperBand = df['upperBand'].iloc[-1]
+                print(f"Upper Band: {upperBand}")
+                if bidPrice > upperBand and state == 'between':
+                    bot.sell(bidPrice, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
+                    current_token = bot.token2
+                    
+        print(f"new loop - Time: {dt.now()}")
+        time.sleep(1)
     
 def bb_double_bottom(df, bot):
     for i in range(len(df)):
