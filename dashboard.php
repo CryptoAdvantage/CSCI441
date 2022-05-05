@@ -52,7 +52,7 @@
                             echo `<td>${avail}:</td>`;
                             echo `<td>${lock}:</td>`;
                             echo `<td>${total}:</td>`;
-                        echo "/tr";
+                        echo "</tr>";
                 echo "</table>"
             ?>
 
