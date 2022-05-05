@@ -14,7 +14,7 @@ try:
 except:
     print("Error imprting binance api functions! <br>")
 try:
-    import models
+    import myModels
 except:
     print("Error importing models <br>")
 
@@ -40,7 +40,7 @@ try:
     baf.initialise(os.environ.get('API_KEY'), os.environ.get('SECRET_KEY'))
     print(baf.testConnection())
     t_bot = tb.TradingBot(email, botName, strategy, exchange, amount, token1, token2, tradeFee, interval)
-    models.bb_simple(t_bot)
+    myModels.bb_simple(t_bot)
 except:
     print("Error running bot.<br>")
 
