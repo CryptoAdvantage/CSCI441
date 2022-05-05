@@ -8,12 +8,14 @@
     include_once "./templates/header.php";
     include_once "./templates/navbar.php";
 
-    $botName = (array_key_exists("bot", $_POST)) ? $_POST["bot"] : "";
-    $exchange = (array_key_exists("exchange", $_POST)) ? $_POST["exchange"] : "";
-    $token1 = (array_key_exists("token1", $_POST)) ? $_POST["token1"] : "";
-    $token2 = (array_key_exists("token2", $_POST)) ? $_POST["token2"] : "";
-    $interval = (array_key_exists("interval", $_POST)) ? $_POST["interval"] : "";
-    $strategy = (array_key_exists("strategy", $_POST)) ? $_POST["strategy"] : "";
+    $email = "hmhamdi@mail.fhsu.edu";
+    $posted = (array_key_exists("bot", $_POST)) ? "true" : "false";
+    $botName = (array_key_exists("bot", $_POST)) ? $_POST["bot"] : "Testing1";
+    $exchange = (array_key_exists("exchange", $_POST)) ? $_POST["exchange"] : "Binanceus";
+    $token1 = (array_key_exists("token1", $_POST)) ? $_POST["token1"] : "BTC";
+    $token2 = (array_key_exists("token2", $_POST)) ? $_POST["token2"] : "USD";
+    $interval = (array_key_exists("interval", $_POST)) ? $_POST["interval"] : "1h";
+    $strategy = (array_key_exists("strategy", $_POST)) ? $_POST["strategy"] : "bb";
    ?>
    
    <body>
@@ -32,14 +34,7 @@
             </div>
             <div>
                 <?php 
-                    echo "<h3>Inside of PHP</h3>";
-                    echo "<br>";
-                    echo "Bot within PHP= " . $botName;
-                    echo "<br>";
-                    echo "Exchange within PHP= " . $exchange;
-                    echo "<br><br>";
-                    echo $user;
-                    exec("python ./tradingBot/bot_api.py $botName $exchange $token1 $token2 $interval $strategy", $output);
+                    exec("python ./tradingBot/bot_api.py $botName $exchange $token1 $token2 $interval $strategy $posted $email", $output);
                     foreach($output as $blah){
                     echo $blah;
                     }
