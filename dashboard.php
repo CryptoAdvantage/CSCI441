@@ -19,7 +19,10 @@
     include_once "./templates/navbar_stduser.php";
 
     $exchange = "binanceus";
-
+    $conn = new Database();
+    $conn->connect();
+    $stmt = $conn->prepare("SELECT `docs` FROM user_account WHERE `user_id`=14 AND `exch_id`=10");
+    $stmt->execute();
 
     // $_SESSION cannot hold objects and will stringify the object so this fails round two.  
     //$tradeHistory = $_SESSION['validatedUser']->getTradeHistory($db);
@@ -32,50 +35,27 @@
         <div class = "user center round-corners"> 
             <h3> Your Crypto: </h3>
             <?php
-                echo "<table style='border: solid 1px black;'>";
-                echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
-
-                class TableRows extends RecursiveIteratorIterator {
-                    function __construct($it) {
-                        parent::__construct($it, self::LEAVES_ONLY);
-                    }
-
-                    function current() {
-                        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current(). "</td>";
-                    }
-
-                    function beginChildren() {
+                echo "<table>";
+                    echo "<tr>";
+                        echo "<th>Cryptocurrency</th>";
+                        echo "<th>Available</th>";
+                        echo "<th>Locked</th>";
+                        echo "<th>Total</th>";
+                    echo "</tr>";
+                    $arr = json_decode($stmt, true);
+                    foreach($arr as $k => $val) {
+                        $avail = $val['free'];
+                        $lock = $val['locked'];
+                        $total = $val['total'];
                         echo "<tr>";
-                    }
-
-                    function endChildren() {
-                        echo "</tr>" . "\n";
-                    }
-                }
-
-                $servername = "localhost";
-                $username = "username";
-                $password = "password";
-                $dbname = "myDBPDO";
-
-                try {
-                    $conn = $Database->connect();
-                    $stmt = $conn->prepare("SELECT `docs` FROM user_account");
-                    $stmt->execute();
-                    $
-                    // set the resulting array to associative
-                    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-                    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-                        echo $v;
-                    }
-                }
-                catch(PDOException $e) {
-                    echo "Error: " . $e->getMessage();
-                }
-                $conn = null;
-                echo "</table>";
+                            echo `<td>${k}:</td>`;
+                            echo `<td>${avail}:</td>`;
+                            echo `<td>${lock}:</td>`;
+                            echo `<td>${total}:</td>`;
+                        echo "/tr";
+                echo "</table>"
             ?>
+
             <!-- <div class = "user-label">
                 <label> Bitcoin: </label>
                 <p> 1.32</p>
