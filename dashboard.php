@@ -2,7 +2,6 @@
 
 <?php    
     include_once "./models/User.php";
-    include_once "./config/Database.php";
     $user = new User();
     $user->validate();
     exec("python ./tradingBot/accountData.py");
@@ -19,10 +18,6 @@
     include_once "./templates/navbar_stduser.php";
 
     $exchange = "binanceus";
-    $conn = new Database();
-    $conn->connect();
-    $stmt = $conn->prepare("SELECT `docs` FROM user_account WHERE `user_id`=14 AND `exch_id`=10");
-    $stmt->execute();
 
     // $_SESSION cannot hold objects and will stringify the object so this fails round two.  
     //$tradeHistory = $_SESSION['validatedUser']->getTradeHistory($db);
@@ -42,7 +37,8 @@
                         echo "<th>Locked</th>";
                         echo "<th>Total</th>";
                     echo "</tr>";
-                    $arr = json_decode($stmt, true);
+                    $result = $user->getAccount();
+                    $arr = json_decode($result, true);
                     foreach($arr as $k => $val) {
                         $avail = $val['free'];
                         $lock = $val['locked'];
@@ -53,7 +49,8 @@
                             echo `<td>${lock}:</td>`;
                             echo `<td>${total}:</td>`;
                         echo "</tr>";
-                echo "</table>"
+                    }
+                echo "</table>";
             ?>
 
             <!-- <div class = "user-label">
@@ -84,4 +81,3 @@
    include_once "./templates/footer.php"
 ?>
 </html>
-

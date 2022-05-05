@@ -94,6 +94,11 @@ class User extends BaseModel{
         return $this->execute($cmd, $arr)->fetchAll();
     }
 
+    public function getAccount(){        
+        $cmd = "SELECT `docs` FROM user_account WHERE `user_id`=14 AND `exch_id`=10";
+        return $this->execute($cmd)->fetchAll();
+    }
+
     public function deleteAccount(){
         if(!$this->hasParams(array("password"))) return false;        
         if(!password_verify($this->POST("password"), $this->password)) return false;
