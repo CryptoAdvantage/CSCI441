@@ -15,10 +15,10 @@ try:
 except:
     print("Error imprting binance api functions! <br>")
 
-try:
+""" try:
     import models
 except:
-    print("Error importing models")
+    print("Error importing models") """
 
 try:
     botName = sys.argv[1]
@@ -63,7 +63,7 @@ except:
     print("Error running bot.<br>") """
 
 try:
-    print("<h3>Trading Bot Settings:</h3>")
+    print("<br><br><h3>Trading Bot Settings:</h3>")
     print("User Email: ", email, "<br>")
     print("Bot Name: ", botName, "<br>")
     print("Exchange: ", exchange, "<br>")
