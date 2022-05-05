@@ -2,6 +2,7 @@
 
 <?php    
     include_once "./models/User.php";
+    include_once "./config/Database.php";
     $user = new User();
     $user->validate();
     exec("python ./tradingBot/accountData.py");
@@ -18,27 +19,6 @@
     include_once "./templates/navbar_stduser.php";
 
     $exchange = "binanceus";
-
-/*     $servername = "localhost";
-    $username = "username";
-    $password = "password";
-    $dbname = "myDBPDO"; */
-
-/*     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare("SELECT `docs` FROM user_account WHERE `user_id`=14 AND `exch_id`=10");
-        $stmt->execute();
-
-        // set the resulting array to associative
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-            echo $v;
-        }
-    } catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-    }
-    $conn = null; */
 
 
     // $_SESSION cannot hold objects and will stringify the object so this fails round two.  
@@ -79,11 +59,10 @@
                 $dbname = "myDBPDO";
 
                 try {
-                    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $stmt = $conn->prepare("SELECT id, firstname, lastname FROM MyGuests");
+                    $conn = $Database->connect();
+                    $stmt = $conn->prepare("SELECT `docs` FROM user_account");
                     $stmt->execute();
-
+                    $
                     // set the resulting array to associative
                     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
