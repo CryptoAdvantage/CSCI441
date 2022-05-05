@@ -20,7 +20,8 @@
    
    <body>
        <main>
-            <h2>Trading Bot Placeholder</h2>
+            <h2>Trading Bot Dashboard</h2>
+            <h3>Bitcoin Price Chart</h3>
             <div id="chart"></div>
             <div id="trades"></div>
             <h3>Settings</h3>
