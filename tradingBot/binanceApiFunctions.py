@@ -918,15 +918,14 @@ def getExchangeInfo(**kwargs):
     return info
 
 # Get recent Trades
-def getRecentTrades(symbolPair, **kwargs):
+def getRecentTrades(symbolPair, limit):
     """ Function: gets the recent trades. Please note the maximum limit is 1,000 trades.
         ------
         Mandatory Params: symbol
         Nonmandatory Params: limit
         ------
         RETURNS: Response for requested information"""
-    params = {"symbol": symbolPair}
-    params = {**params, **kwargs}
+    params = {"symbol": symbolPair, "limit": limit}
     path = "/api/v3/trades"
     trades = request("GET", path, params)
     return trades
@@ -975,13 +974,14 @@ def getObDepth(symbolPair, **kwargs):
     return depth
 
 # Get Live Ticker Price
-def getLivePrice(**kwargs):
+def getLivePrice(symbolPair, **kwargs):
     """ Function: gets the latest price for a token symbol or symbols.
         ------
         NonMandatory Params: symbol
         ------
         RETURNS: Response for requested information"""
-    params = {**kwargs}
+    params = {"symbol": symbolPair}
+    params = {**params, **kwargs}
     path = "/api/v3/ticker/price"
     price = request("GET", path, params)
     return price
@@ -999,13 +999,14 @@ def getAvgPrice(symbolPair):
     return price
 
 # Get Best Order Book Price
-def getBestObPrice(**kwargs):
+def getBestObPrice(symbolPair, **kwargs):
     """ Function: gets the best price/qty on the order book for a token symbol or symbols.
         ------
         Nonmandatory Params: symbol
         ------
         RETURNS: Response for requested information"""
-    params = {**kwargs}
+    params = {"symbol": symbolPair}
+    params = {**params, **kwargs}
     path = "/api/v3/ticker/bookTicker"
     price = request("GET", path, params)
     return price
@@ -1069,6 +1070,7 @@ def getUsrMakerTakerRates(**kwargs):
         Nonmandatory Params: symbol, recvWindow
         ------
         RETURNS: Response for requested information"""
+    #params = {"symbol": symbolPair}
     params = {**kwargs}
     path = "/wapi/v3/tradeFee.html"
     rates = signedRequest("GET", path, params)
