@@ -38,9 +38,9 @@
                     $arr = json_decode($result[0]['docs'], true);
 
                     foreach($arr as $k => $val) {
-                        $avail = round($val['free'],1);
-                        $lock = round($val['locked'],1);
-                        $total = round($val['total'],1);
+                        $avail = ($val['free']>0) ? ($val['free']) : round($val['free'],1);
+                        $lock = ($val['locked']>0) ? ($val['locked']) :round($val['locked'],1);
+                        $total = ($val['total']>0) ? ($val['total']) :round($val['total'],1);
                         echo "<tr>";
                               echo "<td>{$k}</td>";
                               echo "<td>{$avail}</td>";
