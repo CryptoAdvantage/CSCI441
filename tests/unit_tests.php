@@ -1,4 +1,5 @@
 <?php
+include_once "../models/User.php";
 
 function UNIT_TEST_assert_handler($file, $line, $code)
 {
@@ -10,54 +11,70 @@ function UNIT_TEST_assert_handler($file, $line, $code)
 
 function UNIT_TEST_RUN_SUITE() {
     //Start assert functionality, disable default warnings due to our own implementation, stop exection on fail, link our assert_handler
-    assert_options(ASSERT_ACTIVE, 1);
-    assert_options(ASSERT_WARNING, 0);
-    assert_options(ASSERT_QUIET_EVAL, 1);
-    assert_options(ASSERT_BAIL, 1);
+    assert_options(ASSERT_ACTIVE, true);
+    assert_options(ASSERT_WARNING, false);
+    assert_options(ASSERT_BAIL, true);
     assert_options(ASSERT_CALLBACK, 'UNIT_TEST_assert_handler');
 
-    UNIT_TEST_Controller();
+    UNIT_TEST_User();
 
 
 }
 
-function UNIT_TEST_Controller() {
-    $TEST_Controller = new Controller();
-
+function UNIT_TEST_User() {
+    $TEST_User = new User();
+	$_POST["email"] = "test1@cryptoadvantage.com";
+	$_POST["password"] = "Test@1234";
     //Run tests on dummy Controller, Controller will call on Authentication, ProfileManager, and DB testing all these classes.
     //Check login works by logging in with test account and checking session is active with that account
-    assert('$_SESSION["username"] != "TEST_username"');
-    $TEST_Controller->login('TEST_username', 'Test@1234');
-    assert('$_SESSION["username"] = "TEST_username"');
+    assert($_SESSION["loggedin"] != true);
+    $TEST_User->logIn();
+    assert($_SESSION["loggedin"] = true);
 
     //Check logout works by logging out with test account and checking session is NOT active with that account
-    $TEST_Controller->logOut('TEST_username', 'Test@1234');
-    assert('$_SESSION["username"] != "TEST_username"');
+	session_destroy();
+	session_start();
+	assert($_SESSION["loggedin"] != true);
+
 
     //Check Authentication with negative test of non-existent Account
-    $TEST_Controller->login('TEST_NOT_REAL_username', 'Test@1234');
-    assert('$_SESSION["username"] != "TEST_NOT_REAL_username"');
+	$_POST["email"] = "testFAKE1@cryptoadvantage.com";
+	$_POST["password"] = "Test@1234";
+    $TEST_User->login();
+    assert($_SESSION["loggedin"] != true);
+	session_destroy();
+	session_start();
 
-    //Check Delete function works with negative test
-    $TEST_Controller->deleteAccount('TEST_username');
-    $TEST_Controller->login('TEST_username', 'Test@1234');
-    assert('$_SESSION["username"] != "TEST_username"');
-
-    //Check register function of account by loggin in after creating the account
-    $TEST_UserProfile = new UserProfile('Testing', 'Account', 'CryptoAdvantageTestAccount1@gmail.com', 'TEST_username_before_updating','Test@1234');
-    $TEST_Controller->register($TEST_UserProfile);
-    $TEST_Controller->login('TEST_username_before_updating', 'Test@1234');
-    assert('$_SESSION["username"] = "TEST_username_before_updating"');
 
     //Check update functionality works by setting our test account back to original state
-    $TEST_Controller->logOut('TEST_username_before_updating', 'Test@1234');
-    assert('$_SESSION["username"] != "TEST_username_before_updating"');
-    $TEST_Controller->updateAccount($TEST_UserProfile, array('username'=>'TEST_username'));
-    $TEST_Controller->login('TEST_username', 'Test@1234');
-    assert('$_SESSION["username"] = "TEST_username"');
+	$_POST["email"] = "test1@cryptoadvantage.com";
+	$_POST["password"] = "Test@1234";
+	$_POST["currentPassword"] = "Test@1234";
+	$_POST["newPassword"] = "Test@12345";
+	$TEST_User->resetPassword();
+	$_POST["password"] = "Test@12345";
+    $TEST_User->login();
+    assert($_SESSION["loggedin"] = true);
+	session_destroy();
+	session_start();
 
+	//Check Delete function works with negative test
+	$_POST["email"] = "test1@cryptoadvantage.com";
+	$_POST["password"] = "Test@12345";
+    $TEST_User->deleteAccount(true);
+    $TEST_User->login();
+    assert($_SESSION["loggedin"] != true);
+	session_destroy();
+	session_start();
+	
     //Check sanitize function is working as expected by simulating a XSS attack, need to visually check
-    $TEST_Controller->login('<script>alert("XSS")</script>', '');
+	$_POST["email"] = '<script>alert("XSS")</script>';
+	$_POST["password"] = "test@1234";
+	$TEST_User->login();
+	session_destroy();
+	session_start();
+
+	echo "All User Tests Passed!";
 }
 
 function UNIT_TEST_ExchangeManager() {
@@ -113,4 +130,6 @@ function UNIT_TEST_TradeManager() {
     $TEST_ExchangeManager->removeCryptoPair($TEST_ExchangePair);
     assert('$TEST_ExchangeManager->exists($TEST_Exchange, $TEST_TradingPair) = false');
 }
+
+UNIT_TEST_RUN_SUITE()
 ?>
