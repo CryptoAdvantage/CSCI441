@@ -98,7 +98,7 @@ function UNIT_TEST_User() {
 }
 
 function UNIT_TEST_TradingBot() {
-    echo "Testing Trading Bot";
+    echo "Starting Integration testing with Trading Bot";
     $email = "zach@cryptoadvantage.com";
     $posted = (array_key_exists("bot", $_POST)) ? "true" : "false";
     $botName = (array_key_exists("bot", $_POST)) ? $_POST["bot"] : "Test1";

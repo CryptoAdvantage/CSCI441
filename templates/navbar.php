@@ -8,16 +8,17 @@
         </div>
         <div class="menu-options">
             <div class="menu-btn">
-                <div class="menu-btn__burger"></div>   
+                <div class="menu-btn__burger"></div>
             </div>
         </div>
     </div>
-    <nav>              
+    <nav>
         <ul>
-            <li><a href="./index.php">Home</a></li>                    
-            <li><a href="./about.php">About</a></li>                    
+            <li><a href="./index.php">Home</a></li>
+            <li><a href="./about.php">About</a></li>
             <li><a href="./faq.php">FAQ</a></li>
             <li><a href="./login.php">Log In</a></li>
+            <li><a href="./leaderboard.php">Leaderboard</a></li>
             <li><a href="mailto:support@cryptoadvantage.app">Contact</a></li>
         </ul>
     </nav>

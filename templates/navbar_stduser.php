@@ -8,16 +8,17 @@
         </div>
         <div class="menu-options">
             <div class="menu-btn">
-                <div class="menu-btn__burger"></div>   
+                <div class="menu-btn__burger"></div>
             </div>
         </div>
     </div>
-    <nav>              
+    <nav>
         <ul>
-            <li><a href="./dashboard.php">Dashboard</a></li>                    
-            <li><a href="./tradingbot.php">Trading Bot</a></li>                    
+            <li><a href="./dashboard.php">Dashboard</a></li>
+            <li><a href="./tradingbot.php">Trading Bot</a></li>
             <li><a href="./usersettings.php">Settings</a></li>
             <li><a href="./login.php?logout">Log Out</a></li>
+            <li><a href="./leaderboard.php">Leaderboard</a></li>
         </ul>
     </nav>
 </div>
