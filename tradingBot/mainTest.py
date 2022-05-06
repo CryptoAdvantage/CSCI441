@@ -1,4 +1,9 @@
 try:
+    import TradingBot as tb
+    #from .TradingBot import TradingBot
+except:
+    print("Error importing TradingBot.<br>")
+try:
     import sys
 except:
     print("Error importing sys.<br>")
@@ -6,10 +11,7 @@ try:
     import binanceApiFunctions as baf
 except:
     print("Error importing binanceApiFunctions.<br>")
-try:
-    import TradingBot as tb
-except:
-    print("Error importing TradingBot.<br>")
+
 try:
     import testFunctions as test
 except:
@@ -29,11 +31,15 @@ try:
     exchange = sys.argv[2]
     token1 = sys.argv[3].upper()
     token2 = sys.argv[4].upper()
-    tradePair = token1+token2
     interval = sys.argv[5]
     strategy = sys.argv[6]
-    amount = 100
+    posted = sys.argv[7]
+    email = sys.argv[8]
+    amount = 1000
     tradeFee = 0.99925  # fee per trade multiplier
+    tradePair = token1+token2
+    if (strategy == 'bb'):
+        strategy = 'Simple Bollinger Bands'
 except:
     print("Error storing variables. <br>")
 
@@ -63,12 +69,12 @@ def testRun():
 
     # Testing the Trading Bot class
     print("<br><br>Testing the Trading Bot structure:<br>")
-    testBot = tb.TradingBot(amount, token1, token2, tradeFee, interval)
+    testBot = tb.TradingBot(email, botName, strategy, exchange, amount, token1, token2, tradeFee, interval)
     testBot.test()
 
     # Uncomment to test running loop
     #print("<br><br>Testing the Trading Bot loop structure:<br>")
     #test.testBotLoop(token1, token2, interval)
-    
+
 if __name__ == "__main__":
     testRun()

@@ -195,12 +195,12 @@ def signedRequest(method, path, params):
         symbol	            STRING	    YES	    Order trading pair (e.g., BTCUSD, ETHUSD)
         side	            ENUM	    YES	    Order side (e.g., BUY, SELL)
         type	            ENUM	    YES	    Order type (e.g., LIMIT, MARKET, STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT, TAKE_PROFIT_LIMIT, LIMIT_MAKER)
-        timeInForce	        ENUM	    NO	
-        quantity	        DECIMAL	    NO	
-        quoteOrderQty	    DECIMAL	    NO	
+        timeInForce	        ENUM	    NO
+        quantity	        DECIMAL	    NO
+        quoteOrderQty	    DECIMAL	    NO
         price	            DECIMAL	    NO	    Order price
         newClientOrderId	STRING	    NO	    A unique ID among open orders. Automatically generated if not sent.
-                                                Orders with the same newClientOrderID can be accepted only when the 
+                                                Orders with the same newClientOrderID can be accepted only when the
                                                 previous one is filled, otherwise the order will be rejected.
         stopPrice	        DECIMAL	    NO	    Used with STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT, and TAKE_PROFIT_LIMIT orders.
         icebergQty	        DECIMAL	    NO	    Used with LIMIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT to create an iceberg order.
@@ -211,18 +211,18 @@ def signedRequest(method, path, params):
 
     *** Type	            Additional Mandatory Parameters
 
-        LIMIT	            timeInForce, quantity, price	
+        LIMIT	            timeInForce, quantity, price
         MARKET	            quantity or quoteOrderQty
         STOP_LOSS	        quantity, stopPrice
         STOP_LOSS_LIMIT	    timeInForce, quantity, price, stopPrice
         TAKE_PROFIT	        quantity, stopPrice
         TAKE_PROFIT_LIMIT	timeInForce, quantity, price, stopPrice
         LIMIT_MAKER	        quantity, price
-        
-        
+
+
 """
 # Test New Order
-def testNewOrder(symbolPair, side, type, **kwargs):
+def testNewOrder(symbolPair, side, type, assetAmount=None, **kwargs):
     """ Function: Tests a new order
         ------
         Mandatory Params: symbol, side, type
@@ -232,7 +232,8 @@ def testNewOrder(symbolPair, side, type, **kwargs):
     params = {
         "symbol": symbolPair,
         "side": side,
-        "type": type
+        "type": type,
+        "quantity": formatNumber(assetAmount)
     }
     params = {**params, **kwargs}
     path = "/api/v3/order/test"
@@ -534,7 +535,7 @@ def getOrder(symbolPair, orderId=None, origClientOrderId=None, **kwargs):
     """ Function: Requests trade order's status by orderId or origClientOrderId
         ------
         Mandatory Params: symbol, [orderId or origClientOrderId], timestamp
-        Nonmandatory Params: recvWindow 
+        Nonmandatory Params: recvWindow
         ------
         RETURNS: Response for request for a trade order's status"""
     params = {
@@ -551,7 +552,7 @@ def getOrder(symbolPair, orderId=None, origClientOrderId=None, **kwargs):
 def getAllOpenOrders(**kwargs):
     """ Function: Requests all open trade orders on a token symbol. Do not access this without a token symbol as this would return all pair data.
         ------
-        Mandatory Params: timestamp 
+        Mandatory Params: timestamp
         Nonmandatory Params: symbol, recvWindow
         ------
         RETURNS: Response for request for all open trade orders"""
@@ -565,7 +566,7 @@ def cancelOrder(symbolPair, orderId=None, origClientOrderId=None, **kwargs):
     """ Function: Cancels an active trade order and returns response
         ------
         Mandatory Params: symbol, timestamp
-        Nonmandatory Params: orderId, origClientOrderId, newClientOrderId, recvWindow 
+        Nonmandatory Params: orderId, origClientOrderId, newClientOrderId, recvWindow
         ------
         RETURNS: Response from canceled trade order"""
     params = {
@@ -583,7 +584,7 @@ def cancelOpenOrdersForSymbol(symbolPair, orderId=None, origClientOrderId=None, 
     """ Function: Cancels an active trade order
         ------
         Mandatory Params: symbol, timestamp
-        Nonmandatory Params: recvWindow 
+        Nonmandatory Params: recvWindow
         ------
         RETURNS: Response from canceled trade order"""
     params = {"symbol": symbolPair}
@@ -610,8 +611,8 @@ def getTrades(symbolPair, **kwargs):
 def createNewOcoOrder(symbolPair, side, quantity, price, stopPrice, **kwargs):
     """ Function: place a new OCO(one-cancels-the-other) order.
         ------
-        Mandatory Params: symbol, side, quantity, price, stopPrice, timestamp 
-        Nonmandatory Params: listCLientOrderId, limitClientOrderId, limitIcebergQty, stopClientOrderId, stopLimitPrice, 
+        Mandatory Params: symbol, side, quantity, price, stopPrice, timestamp
+        Nonmandatory Params: listCLientOrderId, limitClientOrderId, limitIcebergQty, stopClientOrderId, stopLimitPrice,
                              stopIcebergQty, stopLimitTimeInForce, newOrderRespType, recvWindow
         ------
         RETURNS: Response for new OCO order"""
@@ -946,7 +947,7 @@ def getHistTrades(symbolPair, **kwargs):
 
 # Get Aggregate Trades
 def getAggTrades(symbolPair, **kwargs):
-    """ Function: gets compressed, aggregate trades. Trades that fill at the time, from the same order, 
+    """ Function: gets compressed, aggregate trades. Trades that fill at the time, from the same order,
         with the same price will have the quantity aggregated. Please note the maximum limit is 1,000 trades.
         ------
         Mandatory Params: symbol

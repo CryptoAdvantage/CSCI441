@@ -74,7 +74,7 @@ class User extends BaseModel{
         return str_replace("-","", $phone);
     }
 
-    public function resetPassword(){
+    public function resetPassword($test = false){
         if(!$this->hasParams(array("newPassword", "currentPassword"))) return false;
         if(!password_verify($this->POST("currentPassword"), $this->password)) return false;
 
@@ -82,7 +82,7 @@ class User extends BaseModel{
         $arr = array(password_hash($this->POST("newPassword"), PASSWORD_DEFAULT), $this->email);
 
         $this->execute($cmd, $arr);
-
+        if ($test) {return true;}
         session_destroy();
         header("Location: ./login.php?logout");
         exit;
@@ -104,13 +104,18 @@ class User extends BaseModel{
         if(!$this->hasParams(array("password"))) return false;
 
         if(!password_verify($this->POST("password"), $this->password)) return false;
-
+		if ($test) {
+            $cmd = "DELETE FROM user where `Email`=?";
+            $arr = array($this->email);
+            $this->execute($cmd, $arr);
+            return true;
+        }
         $cmd = "Update user set `Email`=? where `Email`=?";
         // pseudo account removal - changes the address to the former plus hash
         $arr = array($this->email . $this->password, $this->email);
         $this->execute($cmd, $arr);
         session_destroy();
-		if ($test) {exit;}
+
         header("Location: ./login.php");
         exit;
     }

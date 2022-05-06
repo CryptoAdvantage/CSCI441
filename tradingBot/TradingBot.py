@@ -26,10 +26,14 @@ class TradingBot:
         self.reset_bottom()
         self.reset_top()
 
-    def buy(self, price, time):
+    def buy(self, price, time, test=False):
         self.amount = (self.amount / price) * self.trade_fee
-        baf.marketBuyOrder(self.trade_pair, self.amount)    # Calls Binance Market Buy Order
-        #self.buy_test = baf.testNewOrder(self.trade_pair,"BUY","MARKET",quantity=1.0)
+        if not test:
+            baf.marketBuyOrder(self.trade_pair, self.amount)    # Calls Binance Market Buy Order
+        else:
+            self.buy_test = baf.testNewOrder(self.trade_pair,"BUY","MARKET", self.amount)
+
+
         try:
             values = (1, str(time), price)
             cols = f'(`CryptoID`, `Date`, `USD_Price`)'
@@ -42,21 +46,33 @@ class TradingBot:
         except:
             print("Error inserting pricehistory")
         try:
-            values = (8, 10, 14, priceID, "BUY", self.amount)
+            values = (self.user)
+            sqlInsert = f"SELECT id FROM `user` WHERE `email` = '{values}'"
+            botcursor = mysqlPy.cnx.cursor()
+            botcursor.execute(f"USE {mysqlPy.DB_NAME}")
+            botcursor.execute(sqlInsert)
+            userID = botcursor.fetchone()[0]
+            botcursor.reset()
+        except:
+            print("Error getting userID")
+        try:
+            values = (8, 10, userID, priceID, 0, self.amount)
             cols = f'(`PairID`, `ExchID`, `UserID`, `PriceID`, `Action`, `Quantity`)'
             sqlInsert = f"INSERT INTO tradehistory {cols} VALUES {values}"
             botcursor.execute(sqlInsert)
             mysqlPy.cnx.commit()
             botcursor.close()
-            mysqlPy.cnx.close()
         except:
             print("Error inserting tradehistory")
 
-    def sell(self, price, time):
+    def sell(self, price, time, test=False):
         sellAmount = self.amount
         self.amount = self.amount * price * self.trade_fee
-        baf.marketSellOrder(self.trade_pair, self.balance2)   # Calls Binance Market Sell Order
-        #self.sell_test = baf.testNewOrder(self.trade_pair,"SELL","MARKET",quantity=1.0)
+        if not test:
+            baf.marketSellOrder(self.trade_pair, self.balance2)   # Calls Binance Market Sell Order
+        else:
+            self.sell_test = baf.testNewOrder(self.trade_pair,"SELL","MARKET",sellAmount)
+
         try:
             values = (1, str(time), price)
             cols = f'(`CryptoID`, `Date`, `USD_Price`)'
@@ -69,13 +85,22 @@ class TradingBot:
         except:
             print("Error inserting pricehistory")
         try:
-            values = (8, 10, 14, priceID, "SELL", sellAmount)
+            values = (self.user)
+            sqlInsert = f"SELECT id FROM `user` WHERE `email` = '{values}'"
+            botcursor = mysqlPy.cnx.cursor()
+            botcursor.execute(f"USE {mysqlPy.DB_NAME}")
+            botcursor.execute(sqlInsert)
+            userID = botcursor.fetchone()[0]
+            botcursor.reset()
+        except:
+            print("Error getting userID")
+        try:
+            values = (8, 10, userID, priceID, 1, sellAmount)
             cols = f'(`PairID`, `ExchID`, `UserID`, `PriceID`, `Action`, `Quantity`)'
             sqlInsert = f"INSERT INTO tradehistory {cols} VALUES {values}"
             botcursor.execute(sqlInsert)
             mysqlPy.cnx.commit()
             botcursor.close()
-            mysqlPy.cnx.close()
         except:
             print("Error inserting tradehistory")
 
@@ -85,7 +110,7 @@ class TradingBot:
     def reset_top(self):
         self.top = 'none'
 
-def store_trade(self, price, time):
+    def store_trade(self, price, time):
         try:
             cnx = mysql.connector.connect(
                 user=os.environ.get('USER'),
@@ -131,25 +156,19 @@ def store_trade(self, price, time):
 
     def test(self):
         print('<br>Initialized Bot: <br>')
-        print(f"balance: {self.balance}<br>")
+        print(f"balance: {self.amount}<br>")
         print(f"Token: {self.token1}<br>")
         print(f"Current Token: {self.token2}<br>")
         print(f"Trade Pair: {self.trade_pair}<br>")
         print(f"Interval: {self.interval}<br>")
-        print(f"Buys List: {self.buys}<br>")
-        print(f"Sells List: {self.sells}<br>")
         print(f"Trade Fee x: {self.trade_fee}<br>")
-        self.buy(40000.0, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
+        self.buy(20000.0, dt.now().strftime('%Y-%m-%d %H:%M:%S'), True)
         print("<br>***After Buy Order***<br>")
-        print(f"balance: {self.balance}<br>")
+        print(f"balance: {self.amount}<br>")
         print(f"Token: {self.token1}<br>")
         print(f"Current Token: {self.token2}<br>")
-        print(f"Buys List: {self.buys}<br>")
-        print(f"Sells List: {self.sells}<br>")
-        self.sell(50000.0, dt.now().strftime("%d-%m-%Y  %I:%M%p"))
+        self.sell(30000.0, dt.now().strftime('%Y-%m-%d %H:%M:%S'), True)
         print("<br>***After Sell Order***<br>")
-        print(f"balance: {self.balance}<br>")
+        print(f"balance: {self.amount}<br>")
         print(f"Token: {self.token1}<br>")
         print(f"Current Token: {self.token2}<br>")
-        print(f"Buys List: {self.buys}<br>")
-        print(f"Sells List: {self.sells}<br>")

@@ -12,20 +12,20 @@
             ///////////////////////////////////////////////////
             ////    CODE for when the database is hosted   ////
             ///////////////////////////////////////////////////
-            //$url = getenv('JAWSDB_URL');
-            //$dbparts = parse_url($url);
-            //$this->hostname = $dbparts['host'];
-            //$this->username = $dbparts['user'];
-            //$this->password = $dbparts['pass'];
-            //$this->database = ltrim($dbparts['path'],'/');
+            $url = getenv('JAWSDB_URL');
+            $dbparts = parse_url($url);
+            $this->hostname = $dbparts['host'];
+            $this->username = $dbparts['user'];
+            $this->password = $dbparts['pass'];
+            $this->database = ltrim($dbparts['path'],'/');
 
             //////////////////////////////////////////////
             ////    Local Dev with Hosted Database    ////
             //////////////////////////////////////////////
-             $this->hostname = getenv("HOST");
-             $this->username = getenv("USER");
-             $this->password = getenv("PASS");
-             $this->database = getenv("DATABASE");
+             //$this->hostname = getenv("HOST");
+             //$this->username = getenv("USER");
+             //$this->password = getenv("PASS");
+             //$this->database = getenv("DATABASE");
         }
 
         public function connect(){

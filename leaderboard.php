@@ -9,7 +9,7 @@
     if ($method === 'OPTIONS') {
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
     }
-
+    error_reporting(E_ERROR | E_PARSE);
     $pageTitle = "CryptoAdvantage | Leaderboard";
     include_once "./templates/header.php";
     include_once "./templates/navbar_stduser.php";
@@ -23,7 +23,7 @@
 
         <div class = "user center round-corners">
             <h3>Weekly Leaderboard: </h3>
-            <table id='table_dashboard'>
+            <table id='table_Leaderboard'>
              <tr>
                 <th>User</th>
                 <th>Amount Earned</th>
@@ -39,13 +39,13 @@
                     echo "</tr>";
                 }
             ?>
-        </table>
 
+        </table>
         </div>
 
         <div class = "user center round-corners">
             <h3>Monthly Leaderboard: </h3>
-            <table id='table_dashboard'>
+            <table id='table_Leaderboard'>
              <tr>
                 <th>User</th>
                 <th>Amount Earned</th>
