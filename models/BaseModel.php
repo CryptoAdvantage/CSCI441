@@ -39,6 +39,15 @@ class BaseModel{
         return $stmt;
     }
 
+    public function executeString($query, $params = array()){
+        $stmt = $this->db->prepare($query);
+        foreach($params as $id => $param){
+            $stmt->bindValue($id, $param, PDO::PARAM_STR);
+        }
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function hasData($query, $params = array()){
         return $this->execute($query, $params)->rowCount() > 0;
     }

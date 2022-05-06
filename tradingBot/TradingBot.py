@@ -19,7 +19,7 @@ class TradingBot:
         self.top = "none"
         self.reset_bottom()
         self.reset_top()
-        
+
     def buy(self, token, price, time):
         self.balance = (self.balance / price) * self.trade_fee
         #baf.marketBuyOrder(self.trade_pair, self.balance)    # Calls Binance Market Buy Order
@@ -27,7 +27,7 @@ class TradingBot:
         self.buys.append([self.trade_pair, time, price, self.balance])
         self.token = self.curr_token
         self.curr_token = token
-        
+
     def sell(self, token, price, time):
         self.balance = self.balance * price * self.trade_fee
         #baf.marketSellOrder(self.trade_pair, self.balance)   # Calls Binance Market Sell Order
@@ -35,12 +35,56 @@ class TradingBot:
         self.sells.append([self.trade_pair, time, price, self.balance])
         self.token = self.curr_token
         self.curr_token = token
-        
+
     def reset_bottom(self):
         self.bottom = 'none'
-        
+
     def reset_top(self):
         self.top = 'none'
+
+def store_trade(self, price, time):
+        try:
+            cnx = mysql.connector.connect(
+                user=os.environ.get('USER'),
+                password=os.environ.get('PASS'),
+                host=os.environ.get('HOST'),
+                database=os.environ.get('DATABASE')
+            )
+            mycursor = cnx.cursor()
+        except:
+            print("Error connecting to database. <br>")
+
+
+        try:
+            cmd = "SELECT `id` FROM tradepair WHERE `PairTicker`= %s"
+            mycursor.execute(cmd, self.trade_pair)
+            cnx.commit()
+            tradepairID = mycursor.fetchone()
+
+            cmd = "SELECT `id` FROM exchange WHERE `Name`= %s"
+            mycursor.execute(cmd, self.exchange)
+            cnx.commit()
+            exchangeID = mycursor.fetchone()
+
+            cmd = "SELECT `id` FROM cryptocurrency WHERE `Name`= %s"
+            mycursor.execute(cmd, self.token2)
+            cnx.commit()
+            cryptoID = mycursor.fetchone()
+
+            cmd = "INSERT INTO pricehistory (`CryptoID`, `Date`, `USD_Price`) VALUES (%s, %s, %s)"
+            mycursor.execute(cmd, cryptoID, time, price)
+            cnx.commit()
+            priceID = mycursor.lastrowid()
+
+            cmd = "INSERT INTO tradehistory (`PairID`, `ExchID`, `UserID`, `PriceID`, `Action`, `Quantity`) VALUES (%s, %s, %s, %s, %s, %s)"
+            mycursor.execute(cmd, tradepairID, exchangeID, self.user, priceID, '0', self.amount)
+            cnx.commit()
+
+            mycursor.close()
+            cnx.close()
+
+        except:
+            print("Error storing trade data.<br>")
 
     def test(self):
         print('<br>Initialized Bot: <br>')
@@ -66,4 +110,3 @@ class TradingBot:
         print(f"Current Token: {self.curr_token}<br>")
         print(f"Buys List: {self.buys}<br>")
         print(f"Sells List: {self.sells}<br>")
-        

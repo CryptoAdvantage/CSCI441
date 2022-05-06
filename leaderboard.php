@@ -22,25 +22,50 @@
         <h1>CryptoAdvantage Leaderboard</h1>
 
         <div class = "user center round-corners">
-            <?php
-                $leaderboard = New Leaderboard_Model();
-            ?>
-            <h3> Your Crypto: </h3>
+            <h3>Weekly Leaderboard: </h3>
+            <table id='table_dashboard'>
+             <tr>
+                <th>User</th>
+                <th>Amount Earned</th>
+            </tr>
 
             <?php
-                exec("python ./tradingBot/accountData.py $exchange", $output);
-                foreach($output as $blah){
-                echo $blah;
+                $leaderboard = New Leaderboard_Model();
+
+                foreach ($leaderboard->getLeaderboard() as $user => $amount) {
+                    echo "<tr>";
+                    echo "<td>{$user}</td>";
+                    echo "<td>{$amount}</td>";
+                    echo "</tr>";
                 }
             ?>
+        </table>
+
+        </div>
+
+        <div class = "user center round-corners">
+            <h3>Monthly Leaderboard: </h3>
+            <table id='table_dashboard'>
+             <tr>
+                <th>User</th>
+                <th>Amount Earned</th>
+            </tr>
+
+            <?php
+                foreach ($leaderboard->getLeaderboard('MONTH') as $user => $amount) {
+                    echo "<tr>";
+                    echo "<td>{$user}</td>";
+                    echo "<td>{$amount}</td>";
+                    echo "</tr>";
+                }
+            ?>
+
+        </table>
         </div>
 
         <div class = "trade-history">
             <table>
-            <?php
-            print_r($user->getTradeHistory());
-            //This should print the trade history for the user.
-            ?>
+
             </table>
         </div>
     </main>
