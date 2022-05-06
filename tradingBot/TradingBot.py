@@ -3,6 +3,10 @@ try:
 except:
     print("Error importing binance api functions! <br>")
 from datetime import datetime as dt
+try:
+    import mysqlPy
+except:
+    print("Error importing mysqlPy functions <br>")
 
 class TradingBot:
     def __init__(self, user, botName, strategy, exchange, amount, token1, token2, trade_fee, interval):
@@ -16,8 +20,6 @@ class TradingBot:
         self.token2 = token2
         self.trade_pair = token1+token2
         self.interval = interval
-        self.buys = []
-        self.sells = []
         self.trade_fee = trade_fee
         self.bottom = "none"
         self.top = "none"
@@ -25,18 +27,57 @@ class TradingBot:
         self.reset_top()
         
     def buy(self, price, time):
-        self.amount = (baf.getUsrAccountData['balances'][self.token2] / price) * self.trade_fee
-        baf.marketBuyOrder(self.trade_pair, self.balance1)    # Calls Binance Market Buy Order
+        self.amount = (self.amount / price) * self.trade_fee
+        baf.marketBuyOrder(self.trade_pair, self.amount)    # Calls Binance Market Buy Order
         #self.buy_test = baf.testNewOrder(self.trade_pair,"BUY","MARKET",quantity=1.0)
-        lastTrade = baf.getRecentTrades(self.trade_pair, 1)
+        try:
+            values = (1, str(time), price)
+            cols = f'(`CryptoID`, `Date`, `USD_Price`)'
+            sqlInsert = f"INSERT INTO pricehistory {cols} VALUES {values}"
+            botcursor = mysqlPy.cnx.cursor()
+            botcursor.execute(f"USE {mysqlPy.DB_NAME}")
+            botcursor.execute(sqlInsert)
+            priceID = botcursor.lastrowid
+            botcursor.reset()
+        except:
+            print("Error inserting pricehistory")
+        try:
+            values = (8, 10, 14, priceID, "BUY", self.amount)
+            cols = f'(`PairID`, `ExchID`, `UserID`, `PriceID`, `Action`, `Quantity`)'
+            sqlInsert = f"INSERT INTO tradehistory {cols} VALUES {values}"
+            botcursor.execute(sqlInsert)
+            mysqlPy.cnx.commit()
+            botcursor.close()
+            mysqlPy.cnx.close()
+        except:
+            print("Error inserting tradehistory")
 
-        self.buys.append([self.trade_pair, time, price, self.balance1])
-        
     def sell(self, price, time):
-        self.balance = self.balance * price * self.trade_fee
-        self.sells.append([self.trade_pair, time, price, self.balance1])
+        sellAmount = self.amount
+        self.amount = self.amount * price * self.trade_fee
         baf.marketSellOrder(self.trade_pair, self.balance2)   # Calls Binance Market Sell Order
         #self.sell_test = baf.testNewOrder(self.trade_pair,"SELL","MARKET",quantity=1.0)
+        try:
+            values = (1, str(time), price)
+            cols = f'(`CryptoID`, `Date`, `USD_Price`)'
+            sqlInsert = f"INSERT INTO pricehistory {cols} VALUES {values}"
+            botcursor = mysqlPy.cnx.cursor()
+            botcursor.execute(f"USE {mysqlPy.DB_NAME}")
+            botcursor.execute(sqlInsert)
+            priceID = botcursor.lastrowid
+            botcursor.reset()
+        except:
+            print("Error inserting pricehistory")
+        try:
+            values = (8, 10, 14, priceID, "SELL", sellAmount)
+            cols = f'(`PairID`, `ExchID`, `UserID`, `PriceID`, `Action`, `Quantity`)'
+            sqlInsert = f"INSERT INTO tradehistory {cols} VALUES {values}"
+            botcursor.execute(sqlInsert)
+            mysqlPy.cnx.commit()
+            botcursor.close()
+            mysqlPy.cnx.close()
+        except:
+            print("Error inserting tradehistory")
         
     def reset_bottom(self):
         self.bottom = 'none'
