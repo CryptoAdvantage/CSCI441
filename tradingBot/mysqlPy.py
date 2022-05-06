@@ -28,15 +28,15 @@ def createTable(table, tableData, cursor):
     cursor.execute(sqlCreate)
 
 # for local development
-""" cnx = mysql.connector.connect(
+cnx = mysql.connector.connect(
     user="faax40o0f0tzcrci",
     password="aeqnk4mlpsb6vohf",
     host="bv2rebwf6zzsv341.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     database="nt84vrnvzds0ovdv"
-) """
+)
 
 # For Heroku development
-try:
+""" try:
     cnx = mysql.connector.connect(
         user=os.environ.get('USER'),
         password=os.environ.get('PASS'),
@@ -44,4 +44,4 @@ try:
         database=os.environ.get('DATABASE')
     )
 except:
-    print("Error connecting to database. <br>")
+    print("Error connecting to database. <br>") """
