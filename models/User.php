@@ -34,7 +34,7 @@ class User extends BaseModel{
 
         if($pw == null || $email == null) return false;
         if(!$this->exists($email)) return false;
-
+        $userData = $this->execute("Select * from user where email=?", array($_SESSION['email']))->fetchAll()[0];
         $userData = $this->execute("Select * from user where email=?", array($email))->fetchAll()[0];
         if(!password_verify($pw, $userData['Password'])) return false;
 
@@ -96,8 +96,9 @@ class User extends BaseModel{
 
 
     public function getAccount(){
-        $cmd = "SELECT `docs` FROM user_account WHERE `user_id`=14 AND `exch_id`=10";
-        return $this->execute($cmd)->fetchAll();
+        $cmd = "SELECT `docs` FROM user_account WHERE `user_id`=? AND `exch_id`=10";
+        $arr = array($this->id);
+        return $this->execute($cmd, $arr)->fetchAll();
     }
 
     public function deleteAccount($test = false){

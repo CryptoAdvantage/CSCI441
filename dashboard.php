@@ -1,9 +1,10 @@
 <html>
 
-<?php    
+<?php
     include_once "./models/User.php";
     $user = new User();
     $user->validate();
+
     exec("python ./tradingBot/accountData.py");
 
     header('Access-Control-Allow-Origin: *');
@@ -24,7 +25,7 @@
     <main>
         <h1>CryptoAdvantage Dashboard</h1>
 
-        <div class = "user center round-corners"> 
+        <div class = "user center round-corners">
             <h2> Your Crypto: </h2>
             <?php
                 echo "<table id='table_dashboard'";
@@ -50,7 +51,7 @@
                     }
                 echo "</table>";
             ?>
-            
+
         </div>
         <div class = "trading-bots">
             <div class = "trading-bot1 round-corners center">
